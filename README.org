@@ -1,0 +1,3 @@
+#+TITLE: Devuan GNU+Linux
+#+OPTIONS: toc:nil num:nil html-postamble:nil
+#+STARTUP: showall
