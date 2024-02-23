@@ -1,3 +1,139 @@
 #+TITLE: Devuan GNU+Linux
 #+OPTIONS: toc:nil num:nil html-postamble:nil
 #+STARTUP: showall
+
+* Partitioning
+
+* Debootstrap
+#+begin_src bash
+  mount /dev/rootvm/debian /mnt/debinst/
+  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst https://devuan.c3sl.ufpr.br/merged
+  LANG=C.UTF-8 xchroot /mnt/debinst /bin/bash
+#+end_src
+* Kernel
+#+begin_src bash
+  apt install linux-image-amd64
+#+end_src
+* Network
+#+begin_src bash :results drawer
+  cat /etc/network/interfaces
+#+end_src
+
+#+RESULTS:
+:results:
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug eth0
+auto eth0
+iface eth0 inet dhcp
+:end:
+
+* Configure the system
+#+begin_src bash
+  bind '"\e[A": history-search-backward'
+  bind '"\e[B": history-search-forward'
+#+end_src
+
+#+begin_src bash :results drawer
+  cat /etc/apt/sources.list
+#+end_src
+
+#+RESULTS:
+:results:
+deb https://pkgmaster.devuan.org/merged daedalus           main contrib non-free non-free-firmware
+deb https://pkgmaster.devuan.org/merged daedalus-security  main contrib non-free non-free-firmware
+deb https://pkgmaster.devuan.org/merged daedalus-updates   main contrib non-free non-free-firmware
+deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free non-free-firmware
+:end:
+
+#+begin_src bash
+  apt update
+  apt upgrade
+  apt install firmware-linux-free firmware-linux-nonfree firmware-realtek
+  apt install gawk mawk- fonts-terminus locales console-setup
+  dpkg-reconfigure keyboard-configuration
+  dpkg-reconfigure console-setup
+  dpkg-reconfigure tzdata
+  apt install openssh-server openssh-client
+  apt install man-db manpages manpages-dev
+  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop
+#+end_src
+
+* Emacs
+#+begin_src bash
+  apt install -t daedalus-backports emacs-gtk emacs-common-non-dfsg --no-install-recommends
+  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev
+#+end_src
+
+* Openbox
+#+begin_src bash
+  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer --no-install-recommends
+#+end_src
+
+* Fun
+#+begin_src bash
+  apt install neofetch --no-install-recommends
+  apt install cmus --no-install-recommends
+#+end_src
+
+* MPV
+#+begin_src bash
+  apt install -t daedalus-backports mpv yt-dlp
+#+end_src
+
+* Packages
+#+begin_src bash
+  apt install firefox-esr gkrellm gkrellm-volume dict rofi dunst
+  apt install -t daedalus-backports libreoffice-writer libreoffice-calc libreoffice-math libreoffice-gtk3 hunspell-en-us hunspell-pt-br --no-install-recommends
+#+end_src
+
+* KDE Stuff
+#+begin_src bash
+  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin filelight kate kompare kpat ktorrent okteta okular kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 --no-install-recommends
+#+end_src
+
+* obmenu-generator
+#+begin_src bash
+  apt install perl libdata-dump-perl libgtk3-perl cpanminus --no-install-recommends
+  cpanm Linux::DesktopFiles
+#+end_src
+
+#+begin_src bash
+  mkdir ~/.config/obmenu-generator
+  ln -s ../../Work/dotfiles/obmenu-generator/schema.pl ~/.config/obmenu-generator
+  ln -s ../Work/dotfiles/bin/obmenu-generator ~/bin/
+#+end_src
+
+* Connman
+#+begin_src bash
+  apt install connman-gtk connman connman-vpn
+#+end_src
+
+* Distrobox
+#+begin_src bash
+  apt install podman
+#+end_src
+
+#+begin_src bash
+  distrobox create --image docker.io/library/ubuntu:16.04 --name ubuntu16
+  distrobox list
+  distrobox enter ubuntu16
+  distrobox stop ubuntu16
+  distrobox rm ubuntu16
+#+end_src
+
+#+begin_src bash
+  dpkg --add-architecture i386
+  apt update
+  apt upgrade
+  apt-get --no-install-recommends install bash-completion file git mg mc tmux rxvt-unicode-256color xterm xtermcontrol man-db manpages manpages-dev locales psmisc patch rsync ssh-client shared-mime-info xdg-user-dirs mime-support unzip netbase rename ttf-dejavu
+  apt install eagle
+#+end_src
+
