@@ -15,12 +15,11 @@
   apt install linux-image-amd64
 #+end_src
 * Network
-#+begin_src bash :results drawer
+#+begin_src bash :results output verbatim
   cat /etc/network/interfaces
 #+end_src
 
-#+RESULTS:
-:results:
+#+begin_example
 # interfaces(5) file used by ifup(8) and ifdown(8)
 # Include files from /etc/network/interfaces.d:
 source /etc/network/interfaces.d/*
@@ -33,7 +32,7 @@ iface lo inet loopback
 allow-hotplug eth0
 auto eth0
 iface eth0 inet dhcp
-:end:
+#+end_example
 
 * Configure the system
 #+begin_src bash
@@ -41,17 +40,16 @@ iface eth0 inet dhcp
   bind '"\e[B": history-search-forward'
 #+end_src
 
-#+begin_src bash :results drawer
+#+begin_src bash :results output verbatim
   cat /etc/apt/sources.list
 #+end_src
 
-#+RESULTS:
-:results:
+#+begin_example
 deb https://pkgmaster.devuan.org/merged daedalus           main contrib non-free non-free-firmware
 deb https://pkgmaster.devuan.org/merged daedalus-security  main contrib non-free non-free-firmware
 deb https://pkgmaster.devuan.org/merged daedalus-updates   main contrib non-free non-free-firmware
 deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free non-free-firmware
-:end:
+#+end_example
 
 #+begin_src bash
   apt update
