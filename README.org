@@ -63,7 +63,7 @@ deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free
   dpkg-reconfigure tzdata
   apt install openssh-server openssh-client
   apt install man-db manpages manpages-dev
-  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop
+  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3
 #+end_src
 
 * Emacs
@@ -113,7 +113,8 @@ deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free
 
 * Connman
 #+begin_src bash
-  apt install connman-gtk connman connman-vpn
+  apt install connman-gtk connman connman-vpn # --no-install-recommends
+  apt purge ofono bluez
 #+end_src
 
 * Distrobox
@@ -135,5 +136,29 @@ deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free
   apt upgrade
   apt-get --no-install-recommends install bash-completion file git mg mc tmux rxvt-unicode-256color xterm xtermcontrol man-db manpages manpages-dev locales psmisc patch rsync ssh-client shared-mime-info xdg-user-dirs mime-support unzip netbase rename ttf-dejavu
   apt install eagle
+#+end_src
+
+* Install printer (Brother HL-1212W)
+#+begin_src bash
+  apt install cups cups-filters cups-ipp-utils cups-pk-helper printer-driver-brlaser system-config-printer ghostscript --no-install-recommends
+  usermod -a -G lp,lpadmin lefty
+#+end_src
+As normal user:
+#+begin_src bash
+  system-config-printer
+#+end_src
+- Unlock
+- Add
+  + Network Printer
+    - Find Network Printer
+    - Host: printer ip <- Find
+      + IPP Printer <- Forward
+        - Brother (recommended) <- Forward
+          + HL-1200 (recommended) <- Forward
+    - Describe Printer <- Apply
+
+* To buku or not to buku
+#+begin_src bash
+  apt install buku sqlite3
 #+end_src
 
