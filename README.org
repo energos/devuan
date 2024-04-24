@@ -4,6 +4,39 @@
 
 * Partitioning
 
+#+begin_src bash
+  cryptsetup luksFormat --type luks1 /dev/sde2
+  cryptsetup luksOpen /dev/sde2 root1vm
+  vgcreate root1vm /dev/mapper/root1vm
+  lvcreate --name swap -L 512M root1vm
+  lvcreate --name root -l 100%FREE root1vm
+  mkfs.vfat -n EFI1 /dev/sde1
+  mkfs.ext4 -L ROOT1 /dev/root1vm/root
+  mkswap -L SWAP1 /dev/root1vm/swap
+
+  mkdir /mnt/debinst
+  mount /dev/root1vm/root /mnt/debinst/
+  swapon /dev/root1vm/swap
+
+  mkdir -p /mnt/debinst/boot/efi
+  mount /dev/sde1 /mnt/debinst/boot/efi/
+
+  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst http://deb.devuan.org/merged
+
+  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
+#+end_src
+
+#+begin_src example
+# lsblk -f /dev/sde
+NAME               FSTYPE  FSVER  LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sde
+├─sde1             vfat    FAT16  EFI1  AED6-BD65                                31.9M     0% /mnt/debinst/boot/efi
+└─sde2             crypto_ 1            16645700-2da1-4512-bb00-e6b7f4b39714
+  └─root1vm        LVM2_me LVM2 0       znR4uZ-ZWcZ-E1cT-A30U-nUHS-3lfY-L0Xuv6
+    ├─root1vm-swap swap    1      SWAP1 fb2ec4c3-6bfd-4111-bfb2-0fb12ed04e5f                  [SWAP]
+    └─root1vm-root ext4    1.0    ROOT1 52526ed9-4087-4141-9351-c121b9d329ba     12.5G     3% /mnt/debinst
+#+end_src
+
 * Debootstrap
 #+begin_src bash
   mount /dev/rootvm/debian /mnt/debinst/
@@ -45,10 +78,10 @@ iface eth0 inet dhcp
 #+end_src
 
 #+begin_example
-deb https://pkgmaster.devuan.org/merged daedalus           main contrib non-free non-free-firmware
-deb https://pkgmaster.devuan.org/merged daedalus-security  main contrib non-free non-free-firmware
-deb https://pkgmaster.devuan.org/merged daedalus-updates   main contrib non-free non-free-firmware
-deb https://pkgmaster.devuan.org/merged daedalus-backports main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged daedalus           main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged daedalus-security  main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged daedalus-updates   main contrib non-free non-free-firmware
+deb http://deb.devuan.org/merged daedalus-backports main contrib non-free non-free-firmware
 #+end_example
 
 #+begin_src bash
@@ -160,3 +193,191 @@ As normal user:
   apt install buku sqlite3
 #+end_src
 
+* The Whole Enchilada
+#+begin_example
+adwaita-qt
+alsa-pipewire
+alsa-utils
+asciinema
+barrier
+barrier-gui
+base-devel
+base-system
+bash-completion
+bc
+breeze
+breeze-gtk
+breeze-icons
+brother-brlaser
+buku
+cairo-devel
+calibre
+ccache
+chrony
+clang
+clang-tools-extra
+cmake
+cmst
+cmus
+cmus-pulseaudio
+conky
+connman-gtk
+cryptsetup
+cups
+cups-filters
+cups-pk-helper
+dbus
+deadbeef
+debootstrap
+dfu-util
+dict
+djvulibre
+dolphin
+dosbox-staging
+dunst
+elogind
+emacs-gtk3
+enigma
+esptool
+evtest
+feh
+filelight
+firefox-esr
+font-hack-ttf
+font-inconsolata-otf
+foomatic-db
+foomatic-db-engine
+foomatic-db-nonfree
+fortune-mod
+fortune-mod-void
+fuse-sshfs
+geany
+ghostscript
+gimp
+git
+gkrellm
+glxinfo
+gmrun
+gnome-icon-theme
+gnome-themes-extra
+gnome-themes-extra-gtk
+gnuchess
+gperf
+grub
+grub-x86_64-efi
+hdparm
+htop
+hunspell
+hunspell-en_US
+hunspell-pt_BR
+ImageMagick
+inkscape
+iperf3
+juliaup
+kate5
+kcolorchooser
+kde-gtk-config5
+kicad
+kicad-footprints
+kicad-library
+kicad-symbols
+kicad-templates
+knights
+kompare
+kpat
+ktorrent
+liberation-fonts-ttf
+libpng-devel
+libreoffice-calc
+libreoffice-gnome
+libreoffice-kde
+libreoffice-math
+libreoffice-writer
+librepcb
+libva-utils
+libvterm
+linux-lts
+linux-lts-headers
+lvm2
+lxappearance
+make
+man-pages-devel
+man-pages-posix
+mc
+mesa-demos
+mpv
+neofetch
+net-tools
+ninja
+nmap
+obconf
+obmenu-generator
+okteta
+okular
+openbox
+pamixer
+parcellite
+pavucontrol
+picom
+pipewire
+pkgconf
+plocate
+podman
+polkit-elogind
+polkit-kde-agent
+poppler-devel
+poppler-glib-devel
+psmisc
+pulsemixer
+python3-pip
+python3-virtualenv
+qalculate
+qemu
+qemu-ga
+qiv
+qt5ct
+ripgrep
+rofi
+rsync
+rxvt-unicode
+slock
+socklog-void
+sound-theme-freedesktop
+spectacle
+spice-vdagent
+synergy
+sysbench
+system-config-printer
+terminus-font
+the_silver_searcher
+tint2
+tio
+tmux
+tree
+ttf-opensans
+vdpauinfo
+void-repo-nonfree
+volumeicon
+wget
+whois
+wmctrl
+xbindkeys
+xcape
+xclip
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+xdg-user-dirs
+xdg-utils
+xdotool
+xf86-video-qxl
+xinit
+xmag
+xorg
+xterm
+xtermcontrol
+xtools
+yt-dlp
+zig
+zile
+zlib-devel
+#+end_example
