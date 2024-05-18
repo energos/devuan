@@ -79,6 +79,7 @@ g++-12
 gcc-12
 geany-common
 gettext-base
+gimp-data
 gir1.2-atk-1.0
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0
@@ -92,6 +93,9 @@ gir1.2-pango-1.0
 gir1.2-polkit-1.0
 gir1.2-poppler-0.18
 git-man
+glib-networking
+glib-networking-common
+glib-networking-services
 gnome-themes-extra-data
 gnupg
 gnupg-l10n
@@ -104,6 +108,7 @@ gpgconf
 gpgsm
 gpg-wks-client
 gpg-wks-server
+graphviz
 groff-base
 grub2-common
 grub-common
@@ -144,6 +149,7 @@ ktexteditor-katepart
 ktorrent-data
 kwayland-data
 kwin-style-breeze
+lib2geom1.2.0
 liba52-0.7.4
 libaa1
 libaacs0
@@ -156,6 +162,8 @@ libaio1
 libalgorithm-diff-perl
 libalgorithm-diff-xs-perl
 libalgorithm-merge-perl
+libamd2
+libann0
 libao4
 libao-common
 libaom3
@@ -168,6 +176,7 @@ libaribb24-0
 libasan8
 libasound2
 libasound2-data
+libaspell15
 libass9
 libassuan0
 libasyncns0
@@ -193,6 +202,7 @@ libavutil57
 libayatana-appindicator1
 libayatana-indicator7
 libb2-1
+libbabl-0.1-0
 libbdplus0
 libbinutils
 libblas3
@@ -220,6 +230,7 @@ libcairo-gobject-perl
 libcairomm-1.0-1v5
 libcairo-perl
 libcairo-script-interpreter2
+libcamd2
 libcanberra0
 libcanberra-gtk3-0
 libcap2
@@ -229,13 +240,18 @@ libc-bin
 libcbor0.8
 libcc1-0
 libccid
+libccolamd2
 libcddb2
 libc-dev-bin
 libc-devtools
 libcdio19
 libcdio-cdda2
 libcdio-paranoia2
+libcdr-0.1-1
+libcdt5
+libcgraph6
 libchm1
+libcholmod3
 libchromaprint1
 libcjson1
 libc-l10n
@@ -305,6 +321,7 @@ libegl-mesa0
 libelf1
 libelogind0
 libelogind-compat
+libenchant-2-2
 libeot0
 libepoxy0
 libepub0
@@ -365,9 +382,13 @@ libgdbm-compat4
 libgdk-pixbuf-2.0-0
 libgdk-pixbuf2.0-common
 libgee-0.8-2
+libgegl-0.4-0
+libgegl-common
 libgeoip1
+libgexiv2-2
 libgfortran5
 libgif7
+libgimp2.0
 libgirepository-1.0-1
 libgl1
 libgl1-mesa-dri
@@ -399,7 +420,11 @@ libgraphite2-3
 libgs10
 libgs10-common
 libgs-common
+libgsl27
+libgslcblas0
 libgsm1
+libgspell-1-2
+libgspell-1-common
 libgssapi-krb5-2
 libgstreamer1.0-0
 libgstreamer-plugins-base1.0-0
@@ -408,7 +433,11 @@ libgtk2.0-common
 libgtk-3-0
 libgtk-3-common
 libgtkmm-3.0-1v5
+libgts-0.7-5
+libgts-bin
 libgudev-1.0-0
+libgvc6
+libgvpr2
 libhandy-1-0
 libharfbuzz0b
 libharfbuzz-icu0
@@ -600,6 +629,7 @@ libktorrent-l10n
 libkuserfeedbackcore1
 libkuserfeedbackwidgets1
 libkwalletbackend5-5
+liblab-gamut1
 liblangtag1
 liblangtag-common
 liblapack3
@@ -633,6 +663,7 @@ libm17n-0
 libmaa4
 libmad0
 libmagic1
+libmagick++-6.q16-8
 libmagickcore-6.q16-6
 libmagickcore-6.q16-6-extra
 libmagickwand-6.q16-6
@@ -641,9 +672,12 @@ libmatroska7
 libmbedcrypto7
 libmd0
 libmd4c0
+libmetis5
 libmfx1
 libmhash2
+libmikmod3
 libminizip1
+libmng1
 libmnl0
 libmodplug1
 libmodule-build-perl
@@ -659,8 +693,11 @@ libmpg123-0
 libmtdev1
 libmtp9
 libmtp-common
+libmtp-runtime
 libmujs2
 libmwaw-0.3-3
+libmypaint-1.5-1
+libmypaint-common
 libmysofa1
 libmythes-1.2-0
 libncurses6
@@ -723,6 +760,7 @@ libpangomm-1.4-1v5
 libpangoxft-1.0-0
 libpaper1
 libparse-pmfile-perl
+libpathplan4
 libpcap0.8
 libpci3
 libpciaccess0
@@ -760,6 +798,7 @@ libpoppler-glib8
 libpoppler-qt5-1
 libpopt0
 libpostproc56
+libpotrace0
 libproc2-0
 libprotobuf-lite32
 libproxy1v5
@@ -872,6 +911,8 @@ libsbc1
 libsdl1.2debian
 libsdl2-2.0-0
 libsdl-image1.2
+libsdl-net1.2
+libsdl-sound1.2
 libseat1
 libseccomp2
 libsecret-1-0
@@ -903,6 +944,8 @@ libsndfile1
 libsndio7.0
 libsodium23
 libsord-0-0
+libsoup2.4-1
+libsoup2.4-common
 libsoxr0
 libspa-0.2-bluetooth
 libspa-0.2-modules
@@ -967,6 +1010,7 @@ libtwolame0
 libubsan1
 libuchardet0
 libudfread0
+libumfpack5
 libunistring2
 libuno-cppu3
 libuno-cppuhelpergcc3-3
@@ -987,6 +1031,7 @@ libva-x11-2
 libvdpau1
 libvdpau-va-gl1
 libvidstab1.1
+libvisio-0.1-1
 libvlc5
 libvlccore9
 libvorbis0a
@@ -1110,9 +1155,9 @@ libzxcvbn0
 libzxing2
 linux-base
 linux-compiler-gcc-12-x86
-linux-headers-6.1.0-20-amd64
-linux-headers-6.1.0-20-common
-linux-image-6.1.0-20-amd64
+linux-headers-6.1.0-21-amd64
+linux-headers-6.1.0-21-common
+linux-image-6.1.0-21-amd64
 linux-kbuild-6.1
 linux-libc-dev
 lp-solve

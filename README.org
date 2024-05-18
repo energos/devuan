@@ -4,6 +4,24 @@
 
 * Partitioning
 
+- EFI  32M
+- swap 512M
+
+#+begin_src example
+# fdisk -l /dev/sde
+Disk /dev/sde: 28.65 GiB, 30765219840 bytes, 60088320 sectors
+Disk model:  SanDisk 3.2Gen1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: B6F02B81-1546-5D47-9602-E58072BC378F
+
+Device     Start      End  Sectors  Size Type
+/dev/sde1   2048    67583    65536   32M EFI System
+/dev/sde2  67584 60086271 60018688 28.6G Linux filesystem
+#+end_src
+
 #+begin_src bash
   cryptsetup luksFormat --type luks1 /dev/sde2
   cryptsetup luksOpen /dev/sde2 root1vm
@@ -20,10 +38,6 @@
 
   mkdir -p /mnt/debinst/boot/efi
   mount /dev/sde1 /mnt/debinst/boot/efi/
-
-  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst http://deb.devuan.org/merged
-
-  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
 #+end_src
 
 #+begin_src example
@@ -39,13 +53,51 @@ sde
 
 * Debootstrap
 #+begin_src bash
-  mount /dev/rootvm/debian /mnt/debinst/
-  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst https://devuan.c3sl.ufpr.br/merged
-  LANG=C.UTF-8 xchroot /mnt/debinst /bin/bash
+  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst http://deb.devuan.org/merged
+  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
 #+end_src
+
+[[https://www.debian.org/releases/stable/amd64/apds03.en.html][D.3. Installing Debian GNU/Linux from a Unix/Linux System]]
+
+#+begin_src bash
+  mount -t proc  none     /mnt/debinst/proc
+  mount -t sysfs none     /mnt/debinst/sys
+  mount --rbind  /dev/pts /mnt/debinst/dev/pts
+  mount --rbind  /run     /mnt/debinst/run
+
+  LANG=C.UTF-8 chroot /mnt/debinst /bin/bash
+  export TERM=xterm-color
+
+  apt install makedev
+  cd /dev
+  MAKEDEV generic
+#+end_src
+
+#+begin_src bash
+  apt install openssh-server openssh-client --no-install-recommends
+  apt install gawk mawk- fonts-terminus locales console-setup
+  apt install man-db manpages manpages-dev
+  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3 --no-install-recommends
+#+end_src
+
+* Dotfiles (duplicated?)
+- /root/.bash_profile
+- /root/.bashrc
+- /root/.inputrc
+- /root/.tmux.conf
+- /etc/apt/sources.list
+- /etc/network/interfaces
+- /etc/hostname
+- /etc/hosts
+- /etc/fstab
+- /boot/volume.key
+- /etc/crypttab
+- /etc/default/grub
+- /etc/cryptsetup-initramfs/conf-hook
+
 * Kernel
 #+begin_src bash
-  apt install linux-image-amd64
+  apt install linux-image-amd64 linux-headers-amd64 firmware-linux-nonfree firmware-realtek
 #+end_src
 * Network
 #+begin_src bash :results output verbatim
@@ -85,17 +137,34 @@ deb http://deb.devuan.org/merged daedalus-backports main contrib non-free non-fr
 #+end_example
 
 #+begin_src bash
-  apt update
-  apt upgrade
-  apt install firmware-linux-free firmware-linux-nonfree firmware-realtek
-  apt install gawk mawk- fonts-terminus locales console-setup
+  dpkg-reconfigure debconf
   dpkg-reconfigure keyboard-configuration
   dpkg-reconfigure console-setup
   dpkg-reconfigure tzdata
-  apt install openssh-server openssh-client
-  apt install man-db manpages manpages-dev
-  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3
+  dpkg-reconfigure locales
 #+end_src
+
+* LUKS key
+#+begin_src bash
+  dd bs=1 count=64 if=/dev/urandom of=/boot/volume.key
+  cryptsetup luksAddKey /dev/sde2 /boot/volume.key
+  chmod 000 /boot/volume.key
+  chmod -R g-rwx,o-rwx /boot
+#+end_src
+
+
+
+* fstab
+
+* crypttab
+
+* GRUB
+#+begin_src bash
+apt install lsb-release grub-efi 
+
+#+end_src
+
+
 
 * Emacs
 #+begin_src bash
@@ -200,3 +269,7 @@ aptitude search '!~M ~i' -F '%p' | sort -f > packages.manual.txt && aptitude sea
 - [[file:packages.manual.txt][Manually installed packages]]
 - [[file:packages.auto.txt][Automatically installed packages]]
 - [[file:packages.all.txt][All installed packages]]
+* Foreign partitions
+: mount UUID=bed5cbc3-3d88-4091-b687-96679440b6c0 /mnt/Energos/
+: mount UUID=a63767c2-0ab6-469b-a39d-f8db4a2ca1e0 /mnt/Depot/
+: mount UUID=eb6403a3-a0fb-47b7-a68f-7bf38b57894b /mnt/Depot2/

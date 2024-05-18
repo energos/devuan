@@ -1,0 +1,7 @@
+emacs-gtk
+libreoffice-calc
+libreoffice-gtk3
+libreoffice-math
+libreoffice-style-breeze
+libreoffice-writer
+yt-dlp

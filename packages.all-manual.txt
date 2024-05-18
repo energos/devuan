@@ -58,6 +58,7 @@ diffutils
 dmidecode
 dolphin
 dolphin-plugins
+dosbox
 dosfstools
 dpkg
 dunst
@@ -90,6 +91,7 @@ gcc
 gcc-12-base
 geany
 ghostscript
+gimp
 git
 gkrellm
 gkrellm-volume
@@ -112,12 +114,14 @@ init
 initramfs-tools
 initscripts
 init-system-helpers
+inkscape
 insserv
 iproute2
 iputils-ping
 isc-dhcp-client
 isc-dhcp-common
 kate
+kcolorchooser
 kdegraphics-thumbnailers
 kde-spectacle
 kio-extras
@@ -199,6 +203,7 @@ pulseaudio-utils
 pulsemixer
 python3
 python3-pip
+python3-serial
 python3-venv
 qalc
 qiv
