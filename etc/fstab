@@ -1,0 +1,19 @@
+#
+# See fstab(5).
+#
+# <file system>                           <dir>          <type> <options>   <dump> <pass>
+tmpfs                                     /tmp           tmpfs  nosuid,nodev    0   0
+proc                                      /proc          proc   defaults        0   0
+
+/dev/rootvm/debian                        /              ext4   noatime,shared  0   1
+
+/dev/rootvm/home                          /mnt/VoidHome  ext4   noatime         0   2
+/dev/rootvm/void                          /mnt/VoidRoot  ext4   noatime         0   2
+
+/dev/rootvm/swap                          swap           swap   defaults        0   0
+
+# UUID=8752-6D88                            /boot/efi      vfat   defaults        0   2
+
+UUID=bed5cbc3-3d88-4091-b687-96679440b6c0 /mnt/Energos   ext4   noauto,noatime  0   2
+UUID=a63767c2-0ab6-469b-a39d-f8db4a2ca1e0 /mnt/Depot     ext4   noauto,noatime  0   2
+UUID=eb6403a3-a0fb-47b7-a68f-7bf38b57894b /mnt/Depot2    ext4   noauto,noatime  0   2

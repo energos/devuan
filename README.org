@@ -5,8 +5,11 @@
 * Partitioning
 
 - EFI  32M
-- swap 512M
+- LVM
+  + swap 512M or 1G
+  + /    rest
 
+** 32G
 #+begin_src example
 # fdisk -l /dev/sde
 Disk /dev/sde: 28.65 GiB, 30765219840 bytes, 60088320 sectors
@@ -21,7 +24,23 @@ Device     Start      End  Sectors  Size Type
 /dev/sde1   2048    67583    65536   32M EFI System
 /dev/sde2  67584 60086271 60018688 28.6G Linux filesystem
 #+end_src
+** 64G
+#+begin_src example
+# fdisk -l /dev/sde
+Disk /dev/sde: 57.3 GiB, 61524148224 bytes, 120164352 sectors
+Disk model:  SanDisk 3.2Gen1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 022FBF37-4FAA-DB49-A0FC-7DE4201EFD62
 
+Device     Start       End   Sectors  Size Type
+/dev/sde1   2048     67583     65536   32M EFI System
+/dev/sde2  67584 120162303 120094720 57.3G Linux filesystem
+#+end_src
+
+* Encrypted LVM
 #+begin_src bash
   cryptsetup luksFormat --type luks1 /dev/sde2
   cryptsetup luksOpen /dev/sde2 root1vm
@@ -40,6 +59,7 @@ Device     Start      End  Sectors  Size Type
   mount /dev/sde1 /mnt/debinst/boot/efi/
 #+end_src
 
+** 32G
 #+begin_src example
 # lsblk -f /dev/sde
 NAME               FSTYPE  FSVER  LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
@@ -50,34 +70,86 @@ sde
     ├─root1vm-swap swap    1      SWAP1 fb2ec4c3-6bfd-4111-bfb2-0fb12ed04e5f                  [SWAP]
     └─root1vm-root ext4    1.0    ROOT1 52526ed9-4087-4141-9351-c121b9d329ba     12.5G     3% /mnt/debinst
 #+end_src
+** 64G
+#+begin_example
+# lsblk -f /dev/sde
+NAME            FSTYPE FSVER LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sde
+├─sde1          vfat   FAT16 EFI7  06F0-045B                                31.9M     0% /mnt/debinst/boot/efi
+└─sde2          crypto 1           a1741189-00dc-4d77-a463-28ca6f49e9bf
+  └─root7vm     LVM2_m LVM2        balDce-MQmx-0iCm-Lic0-GBUN-SxZf-YJQTy9
+    ├─root7vm-swap
+    │           swap   1     SWAP7 467752f4-2bf9-4d6e-a24d-286ac60e256a                  [SWAP]
+    └─root7vm-root
+                ext4   1.0   ROOT7 e71b6cd8-d34b-4020-a45c-f3387fac5b38     52.2G     0% /mnt/debinst
+#+end_example
 
 * Debootstrap
+
 #+begin_src bash
-  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs daedalus /mnt/debinst http://deb.devuan.org/merged
-  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
+  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs,console-setup,fonts-terminus daedalus /mnt/debinst http://deb.devuan.org/merged
 #+end_src
 
-[[https://www.debian.org/releases/stable/amd64/apds03.en.html][D.3. Installing Debian GNU/Linux from a Unix/Linux System]]
+#+begin_src bash
+  cp Work/devuan/root/.bash_profile /mnt/debinst/root
+  cp Work/devuan/root/.bashrc /mnt/debinst/root
+  cp Work/devuan/root/.inputrc /mnt/debinst/root
+  cp Work/devuan/root/.tmux.conf /mnt/debinst/root
+  cp Work/devuan/etc/apt/sources.list /mnt/debinst/etc/apt
+  cp Work/devuan/etc/apt/apt.conf.d/90norecommends /mnt/debinst/etc/apt/apt.conf.d
+  cp Work/devuan/etc/network/interfaces /mnt/debinst/etc/network
+#+end_src
 
+#+begin_src bash
+  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
+  export TERM=xterm-color
+  printf '\e]0;%s\a' "Devuan CHROOT"
+#+end_src
+or
 #+begin_src bash
   mount -t proc  none     /mnt/debinst/proc
   mount -t sysfs none     /mnt/debinst/sys
-  mount --rbind  /dev/pts /mnt/debinst/dev/pts
+  mount --rbind  /dev     /mnt/debinst/dev
   mount --rbind  /run     /mnt/debinst/run
-
   LANG=C.UTF-8 chroot /mnt/debinst /bin/bash
   export TERM=xterm-color
-
-  apt install makedev
-  cd /dev
-  MAKEDEV generic
+  printf '\e]0;%s\a' "Devuan CHROOT"
 #+end_src
 
 #+begin_src bash
-  apt install openssh-server openssh-client --no-install-recommends
-  apt install gawk mawk- fonts-terminus locales console-setup
-  apt install man-db manpages manpages-dev
-  apt install pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3 --no-install-recommends
+  apt install openssh-server openssh-client gawk mawk- locales man-db manpages manpages-dev pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3 lsb-release zstd unzip
+#+end_src
+
+* Kernel
+#+begin_src bash
+  apt install linux-image-amd64 linux-headers-amd64 intel-microcode amd64-microcode firmware-linux-free firmware-linux-nonfree firmware-realtek
+#+end_src
+
+#+begin_src bash
+  dpkg-reconfigure debconf
+  dpkg-reconfigure keyboard-configuration
+  dpkg-reconfigure locales
+  dpkg-reconfigure console-setup
+  dpkg-reconfigure tzdata
+#+end_src
+
+* LUKS key
+#+begin_src bash
+  dd bs=1 count=64 if=/dev/urandom of=/boot/volume.key
+  cryptsetup luksAddKey /dev/sde2 /boot/volume.key
+  chmod 000 /boot/volume.key
+  chmod -R g-rwx,o-rwx /boot
+#+end_src
+
+* GRUB
+#+begin_src bash
+  apt install grub-efi --install-recommends
+#+end_src
+
+#+begin_src bash
+  grub-install --removable --recheck --efi-directory=/boot/efi --boot-directory=/boot /dev/sde
+  update-grub
+  update-initramfs -u
 #+end_src
 
 * Dotfiles (duplicated?)
@@ -94,93 +166,22 @@ sde
 - /etc/crypttab
 - /etc/default/grub
 - /etc/cryptsetup-initramfs/conf-hook
-
-* Kernel
-#+begin_src bash
-  apt install linux-image-amd64 linux-headers-amd64 firmware-linux-nonfree firmware-realtek
-#+end_src
-* Network
-#+begin_src bash :results output verbatim
-  cat /etc/network/interfaces
-#+end_src
-
-#+begin_example
-# interfaces(5) file used by ifup(8) and ifdown(8)
-# Include files from /etc/network/interfaces.d:
-source /etc/network/interfaces.d/*
-
-# The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-allow-hotplug eth0
-auto eth0
-iface eth0 inet dhcp
-#+end_example
-
-* Configure the system
-#+begin_src bash
-  bind '"\e[A": history-search-backward'
-  bind '"\e[B": history-search-forward'
-#+end_src
-
-#+begin_src bash :results output verbatim
-  cat /etc/apt/sources.list
-#+end_src
-
-#+begin_example
-deb http://deb.devuan.org/merged daedalus           main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged daedalus-security  main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged daedalus-updates   main contrib non-free non-free-firmware
-deb http://deb.devuan.org/merged daedalus-backports main contrib non-free non-free-firmware
-#+end_example
-
-#+begin_src bash
-  dpkg-reconfigure debconf
-  dpkg-reconfigure keyboard-configuration
-  dpkg-reconfigure console-setup
-  dpkg-reconfigure tzdata
-  dpkg-reconfigure locales
-#+end_src
-
-* LUKS key
-#+begin_src bash
-  dd bs=1 count=64 if=/dev/urandom of=/boot/volume.key
-  cryptsetup luksAddKey /dev/sde2 /boot/volume.key
-  chmod 000 /boot/volume.key
-  chmod -R g-rwx,o-rwx /boot
-#+end_src
-
-
-
-* fstab
+- /boot/grub/background.tga
+- /boot/grub/splash.tga
+- /boot/grub/terminus28b.pf2
 
 * crypttab
 
-* GRUB
-#+begin_src bash
-apt install lsb-release grub-efi 
-
-#+end_src
-
-
-
-* Emacs
-#+begin_src bash
-  apt install -t daedalus-backports emacs-gtk emacs-common-non-dfsg --no-install-recommends
-  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev
-#+end_src
+* fstab
 
 * Openbox
 #+begin_src bash
-  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer --no-install-recommends
+  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer neofetch cmus cmus-plugin-ffmpeg gkrellm gkrellm-volume dict rofi dunst firefox-esr ca-certificates libpaper-utils catdoc ffmpeg
 #+end_src
 
-* Fun
+* KDE Stuff
 #+begin_src bash
-  apt install neofetch --no-install-recommends
-  apt install cmus --no-install-recommends
+  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin filelight kate kompare kpat ktorrent okteta okular kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 pkexec kruler kcolorchooser
 #+end_src
 
 * MPV
@@ -188,20 +189,22 @@ apt install lsb-release grub-efi
   apt install -t daedalus-backports mpv yt-dlp
 #+end_src
 
-* Packages
+* Emacs
 #+begin_src bash
-  apt install firefox-esr gkrellm gkrellm-volume dict rofi dunst
-  apt install -t daedalus-backports libreoffice-writer libreoffice-calc libreoffice-math libreoffice-gtk3 hunspell-en-us hunspell-pt-br --no-install-recommends
+  apt install -t daedalus-backports emacs-gtk emacs-common-non-dfsg
+  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev
 #+end_src
 
-* KDE Stuff
+####################################################################################################
+
+* Office
 #+begin_src bash
-  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin filelight kate kompare kpat ktorrent okteta okular kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 --no-install-recommends
+  apt install -t daedalus-backports libreoffice-writer libreoffice-calc libreoffice-math libreoffice-gtk3 libreoffice-style-breeze hunspell-en-us hunspell-pt-br hunspell
 #+end_src
 
 * obmenu-generator
 #+begin_src bash
-  apt install perl libdata-dump-perl libgtk3-perl cpanminus --no-install-recommends
+  apt install perl libdata-dump-perl libgtk3-perl cpanminus
   cpanm Linux::DesktopFiles
 #+end_src
 
@@ -213,13 +216,12 @@ apt install lsb-release grub-efi
 
 * Connman
 #+begin_src bash
-  apt install connman-gtk connman connman-vpn # --no-install-recommends
-  apt purge ofono bluez
+  apt install connman-gtk connman connman-vpn wpasupplicant
 #+end_src
 
 * Distrobox
 #+begin_src bash
-  apt install podman
+  apt install podman --install-recommends
 #+end_src
 
 #+begin_src bash
@@ -240,7 +242,7 @@ apt install lsb-release grub-efi
 
 * Install printer (Brother HL-1212W)
 #+begin_src bash
-  apt install cups cups-filters cups-ipp-utils cups-pk-helper printer-driver-brlaser system-config-printer ghostscript --no-install-recommends
+  apt install cups cups-filters cups-ipp-utils cups-pk-helper printer-driver-brlaser system-config-printer ghostscript
   usermod -a -G lp,lpadmin lefty
 #+end_src
 As normal user:
@@ -259,7 +261,7 @@ As normal user:
 
 * To buku or not to buku
 #+begin_src bash
-  apt install buku sqlite3
+  apt install buku python3-lxml
 #+end_src
 
 * The Whole Enchilada

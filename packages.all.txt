@@ -119,6 +119,7 @@ dunst
 e2fsprogs
 easy-rsa
 efibootmgr
+eject
 elogind
 emacs-bin-common
 emacs-common
@@ -274,6 +275,7 @@ kompare
 kpackagetool5
 kpart5-kompare
 kpat
+kruler
 ktexteditor-data
 ktexteditor-katepart
 ktorrent

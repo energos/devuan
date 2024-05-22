@@ -63,6 +63,7 @@ dosfstools
 dpkg
 dunst
 e2fsprogs
+eject
 emacs-common-non-dfsg
 eudev
 evtest
@@ -127,6 +128,7 @@ kio-extras
 kmod
 kompare
 kpat
+kruler
 ktorrent
 less
 libdata-dump-perl
