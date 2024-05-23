@@ -128,7 +128,6 @@ kde-style-breeze
 keyboard-configuration
 kinit
 kio
-kio-extras
 kio-extras-data
 klibc-utils
 kpackagetool5
@@ -880,7 +879,6 @@ librpmbuild9
 librpmio9
 librpmsign9
 librsvg2-2
-librsvg2-common
 librtmp1
 librubberband2
 libsamplerate0

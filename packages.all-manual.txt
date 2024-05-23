@@ -131,6 +131,7 @@ kate
 kcolorchooser
 kdegraphics-thumbnailers
 kde-spectacle
+kio-extras
 kmod
 kompare
 kpat
@@ -150,6 +151,7 @@ libreoffice-gtk3
 libreoffice-math
 libreoffice-style-breeze
 libreoffice-writer
+librsvg2-common
 libssl-dev
 libtool
 libusb-1.0-0

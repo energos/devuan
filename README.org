@@ -176,7 +176,7 @@ or
 
 * Openbox
 #+begin_src bash
-  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer neofetch cmus cmus-plugin-ffmpeg gkrellm gkrellm-volume dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc ffmpeg parcellite
+  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer neofetch cmus cmus-plugin-ffmpeg gkrellm gkrellm-volume dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc ffmpeg parcellite librsvg2-common
 #+end_src
 
 * KDE Stuff
