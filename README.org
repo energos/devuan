@@ -117,7 +117,7 @@ or
 #+end_src
 
 #+begin_src bash
-  apt install openssh-server openssh-client gawk mawk- locales man-db manpages manpages-dev pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan imagemagick rpm sqlite3 lsb-release zstd unzip
+  apt install openssh-server openssh-client gawk mawk- locales man-db manpages manpages-dev pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan apt-rdepends  imagemagick rpm sqlite3 lsb-release zstd unzip daemon dosfstools eject rsync fakeroot
 #+end_src
 
 * Kernel
@@ -176,7 +176,7 @@ or
 
 * Openbox
 #+begin_src bash
-  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer neofetch cmus cmus-plugin-ffmpeg gkrellm gkrellm-volume dict rofi dunst firefox-esr ca-certificates libpaper-utils catdoc ffmpeg
+  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk pipewire-audio xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany pavucontrol pulseaudio-utils pulsemixer pamixer neofetch cmus cmus-plugin-ffmpeg gkrellm gkrellm-volume dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc ffmpeg parcellite
 #+end_src
 
 * KDE Stuff
@@ -217,6 +217,12 @@ or
 * Connman
 #+begin_src bash
   apt install connman-gtk connman connman-vpn wpasupplicant
+#+end_src
+
+* ESP-IDF
+#+begin_src bash
+  apt install git wget flex bison gperf python3 python3-dev python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+  apt install python3-serial
 #+end_src
 
 * Distrobox
@@ -263,6 +269,19 @@ As normal user:
 #+begin_src bash
   apt install buku python3-lxml
 #+end_src
+
+* Stuff
+#+begin_src bash
+  apt install dosbox calibre inkscape qalc
+  apt install gimp --install-recommends
+  apt install openvpn openresolv --install-recommends
+#+end_src
+
+* WTF
+** Stranger Things
+- libaacs0 libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libbdplus0 libc-devtools libdecor-0-plugin-1-cairo libdjvulibre21 libdjvulibre-text libfile-fcntllock-perl libfl2 libfl-dev libldap-common libltdl-dev libmagickcore-6.q16-6-extra libnetpbm11 libpng-tools libsasl2-modules netpbm pocketsphinx-en-us publicsuffix thin-provisioning-tools seatd
+** Why?
+- /sbin/resolvconf: 230: /lib/resolvconf/libc: cannot create /etc/resolv.conf: Directory nonexistent
 
 * The Whole Enchilada
 #+begin_src bash

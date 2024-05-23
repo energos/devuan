@@ -1,7 +1,9 @@
 adduser
 adwaita-icon-theme
+amd64-microcode
 apt
 aptitude
+apt-rdepends
 apt-utils
 autoconf
 automake
@@ -21,6 +23,7 @@ build-essential
 buku
 ca-certificates
 calibre
+catdoc
 ccache
 chrony
 ckermit
@@ -68,8 +71,10 @@ emacs-common-non-dfsg
 emacs-gtk
 eudev
 evtest
+fakeroot
 fdisk
 feh
+ffmpeg
 file
 filelight
 findutils
@@ -117,6 +122,7 @@ initscripts
 init-system-helpers
 inkscape
 insserv
+intel-microcode
 iproute2
 iputils-ping
 isc-dhcp-client
@@ -125,7 +131,6 @@ kate
 kcolorchooser
 kdegraphics-thumbnailers
 kde-spectacle
-kio-extras
 kmod
 kompare
 kpat
@@ -133,7 +138,9 @@ kruler
 ktorrent
 less
 libdata-dump-perl
+libffi-dev
 libgtk3-perl
+libmtp-runtime
 libpaper-utils
 libpng-dev
 libpoppler-dev
@@ -143,7 +150,6 @@ libreoffice-gtk3
 libreoffice-math
 libreoffice-style-breeze
 libreoffice-writer
-librsvg2-common
 libssl-dev
 libtool
 libusb-1.0-0
@@ -164,6 +170,7 @@ man-db
 manpages
 manpages-dev
 mc
+mesa-vulkan-drivers
 mime-support
 mount
 mpv
@@ -204,6 +211,8 @@ psmisc
 pulseaudio-utils
 pulsemixer
 python3
+python3-dev
+python3-lxml
 python3-pip
 python3-serial
 python3-venv
@@ -235,8 +244,11 @@ tio
 tmux
 traceroute
 tzdata
+unzip
 util-linux
 util-linux-extra
+va-driver-all
+vdpau-driver-all
 vim-common
 vim-tiny
 wget
@@ -261,3 +273,4 @@ yt-dlp
 zile
 zlib1g
 zlib1g-dev
+zstd

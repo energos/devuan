@@ -1,8 +1,5 @@
 aardvark-dns
-amd64-microcode
-apparmor
 aptitude-common
-arch-test
 at-spi2-common
 autotools-dev
 baloo-kf5
@@ -59,9 +56,6 @@ emacs-bin-common
 emacs-common
 emacs-el
 emacsen-common
-evemu-tools
-fakeroot
-ffmpeg
 firmware-amd-graphics
 firmware-misc-nonfree
 fontconfig
@@ -116,7 +110,6 @@ grub-efi-amd64
 grub-efi-amd64-bin
 grub-efi-amd64-signed
 gsettings-desktop-schemas
-gsfonts
 gtk2-engines-pixbuf
 gtk-update-icon-cache
 guile-3.0-libs
@@ -127,7 +120,6 @@ imagemagick-6.q16
 initramfs-tools-core
 install-info
 intel-media-va-driver
-intel-microcode
 iptables
 isa-support
 iso-codes
@@ -140,6 +132,7 @@ kde-style-breeze
 keyboard-configuration
 kinit
 kio
+kio-extras
 kio-extras-data
 klibc-utils
 kpackagetool5
@@ -170,6 +163,7 @@ libaom3
 libapparmor1
 libappimage1.0abi1
 libapt-pkg6.0
+libapt-pkg-perl
 libarchive13
 libargon2-1
 libaribb24-0
@@ -332,7 +326,6 @@ libetonyek-0.1-1
 libeudev1
 libev4
 libevdev2
-libevemu3
 libevent-2.1-7
 libevent-core-2.1-7
 libexif12
@@ -348,7 +341,6 @@ libfakeroot
 libfastjson4
 libfdisk1
 libffi8
-libffi-dev
 libfftw3-double3
 libfido2-1
 libfile-fcntllock-perl
@@ -693,7 +685,6 @@ libmpg123-0
 libmtdev1
 libmtp9
 libmtp-common
-libmtp-runtime
 libmujs2
 libmwaw-0.3-3
 libmypaint-1.5-1
@@ -901,6 +892,7 @@ librpmbuild9
 librpmio9
 librpmsign9
 librsvg2-2
+librsvg2-common
 librtmp1
 librubberband2
 libsamplerate0
@@ -1169,11 +1161,9 @@ mc-data
 media-types
 mesa-va-drivers
 mesa-vdpau-drivers
-mesa-vulkan-drivers
 mokutil
 ncurses-base
 ncurses-bin
-ncurses-term
 netavark
 netpbm
 nmap-common
@@ -1225,7 +1215,6 @@ python3-cups
 python3-cupshelpers
 python3-dateutil
 python3-dbus
-python3-dev
 python3-distutils
 python3-feedparser
 python3-gi
@@ -1236,7 +1225,6 @@ python3-idna
 python3-ifaddr
 python3-jeepney
 python3-lib2to3
-python3-lxml
 python3-markdown
 python3-mechanize
 python3-minimal
@@ -1322,8 +1310,6 @@ uidmap
 uno-libs-private
 ure
 uuid-dev
-va-driver-all
-vdpau-driver-all
 vlc-data
 vlc-plugin-base
 vlc-plugin-video-output
@@ -1356,4 +1342,3 @@ xserver-xorg-input-libinput
 xtrans-dev
 xz-utils
 yudit-common
-zstd

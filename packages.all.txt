@@ -2,12 +2,11 @@ aardvark-dns
 adduser
 adwaita-icon-theme
 amd64-microcode
-apparmor
 apt
 aptitude
 aptitude-common
+apt-rdepends
 apt-utils
-arch-test
 at-spi2-common
 autoconf
 automake
@@ -40,6 +39,7 @@ ca-certificates
 calibre
 calibre-bin
 catatonit
+catdoc
 ccache
 chrony
 ckermit
@@ -128,7 +128,6 @@ emacs-el
 emacsen-common
 emacs-gtk
 eudev
-evemu-tools
 evtest
 fakeroot
 fdisk
@@ -221,7 +220,6 @@ grub-efi-amd64
 grub-efi-amd64-bin
 grub-efi-amd64-signed
 gsettings-desktop-schemas
-gsfonts
 gtk2-engines-pixbuf
 gtk-update-icon-cache
 guile-3.0-libs
@@ -304,6 +302,7 @@ libaom3
 libapparmor1
 libappimage1.0abi1
 libapt-pkg6.0
+libapt-pkg-perl
 libarchive13
 libargon2-1
 libaribb24-0
@@ -467,7 +466,6 @@ libetonyek-0.1-1
 libeudev1
 libev4
 libevdev2
-libevemu3
 libevent-2.1-7
 libevent-core-2.1-7
 libexif12
@@ -1345,7 +1343,6 @@ ncal
 ncat
 ncurses-base
 ncurses-bin
-ncurses-term
 neofetch
 netavark
 netbase
@@ -1557,6 +1554,7 @@ tzdata
 ucf
 uidmap
 uno-libs-private
+unzip
 ure
 util-linux
 util-linux-extra
