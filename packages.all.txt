@@ -31,7 +31,6 @@ bsdextrautils
 bsdutils
 bubblewrap
 buildah
-build-essential
 buku
 busybox
 bzip2
@@ -114,7 +113,6 @@ dolphin-plugins
 dosbox
 dosfstools
 dpkg
-dpkg-dev
 dunst
 e2fsprogs
 easy-rsa
@@ -162,8 +160,6 @@ fortunes-debian-hints
 fortunes-min
 fuse3
 fuse-overlayfs
-g++
-g++-12
 gawk
 gcc
 gcc-12
@@ -284,16 +280,12 @@ less
 lib2geom1.2.0
 liba52-0.7.4
 libaa1
-libaacs0
 libabsl20220623
 libabw-0.1-1
 libaccounts-glib0
 libaccounts-qt5-1
 libacl1
 libaio1
-libalgorithm-diff-perl
-libalgorithm-diff-xs-perl
-libalgorithm-merge-perl
 libamd2
 libann0
 libao4
@@ -336,7 +328,6 @@ libayatana-appindicator1
 libayatana-indicator7
 libb2-1
 libbabl-0.1-0
-libbdplus0
 libbinutils
 libblas3
 libblkid1
@@ -422,7 +413,6 @@ libdconf1
 libde265-0
 libdebconfclient0
 libdecor-0-0
-libdecor-0-plugin-1-cairo
 libdeflate0
 libdevmapper1.02.1
 libdevmapper-event1.02.1
@@ -484,11 +474,8 @@ libffi8
 libffi-dev
 libfftw3-double3
 libfido2-1
-libfile-fcntllock-perl
 libfile-pushd-perl
-libfl2
 libflac12
-libfl-dev
 libflite1
 libfontconfig1
 libfontconfig-dev
@@ -772,7 +759,6 @@ liblcms2-2
 libldacbt-abr2
 libldacbt-enc2
 libldap-2.5-0
-libldap-common
 libldb2
 liblerc4
 liblilv-0-0
@@ -786,7 +772,6 @@ liblognorm5
 liblqr-1-0
 liblsan0
 libltdl7
-libltdl-dev
 liblua5.2-0
 liblua5.3-0
 liblvm2cmd2.03
@@ -921,7 +906,6 @@ libplacebo208
 libplist3
 libpng16-16
 libpng-dev
-libpng-tools
 libpocketsphinx3
 libpodofo0.9.8
 libpolkit-agent-1-0
@@ -1049,7 +1033,6 @@ librtmp1
 librubberband2
 libsamplerate0
 libsasl2-2
-libsasl2-modules
 libsasl2-modules-db
 libsbc1
 libsdl1.2debian
@@ -1110,7 +1093,6 @@ libssl3
 libssl-dev
 libstaroffice-0.0-0
 libstartup-notification0
-libstdc++-12-dev
 libstdc++6
 libstemmer0d
 libstoken1
@@ -1393,7 +1375,6 @@ pkgconf-bin
 pkg-config
 plasma-framework
 plocate
-pocketsphinx-en-us
 podman
 polkitd
 polkit-kde-agent-1
@@ -1402,7 +1383,6 @@ poppler-utils
 printer-driver-brlaser
 procps
 psmisc
-publicsuffix
 pulseaudio-utils
 pulsemixer
 pyqt6-dev-tools
@@ -1544,7 +1524,6 @@ sysv-rc
 tar
 tasksel
 tasksel-data
-thin-provisioning-tools
 tint2
 tio
 tmux

@@ -19,7 +19,6 @@ breeze
 breeze-gtk-theme
 breeze-icon-theme
 bsdutils
-build-essential
 buku
 ca-certificates
 calibre
@@ -138,6 +137,7 @@ kpat
 kruler
 ktorrent
 less
+libc-devtools
 libdata-dump-perl
 libffi-dev
 libgtk3-perl

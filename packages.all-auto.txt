@@ -48,7 +48,6 @@ dictionaries-common
 dirmngr
 dmeventd
 dmsetup
-dpkg-dev
 easy-rsa
 efibootmgr
 elogind
@@ -68,8 +67,6 @@ fonts-urw-base35
 fortunes-min
 fuse3
 fuse-overlayfs
-g++
-g++-12
 gcc-12
 geany-common
 gettext-base
@@ -144,16 +141,12 @@ kwin-style-breeze
 lib2geom1.2.0
 liba52-0.7.4
 libaa1
-libaacs0
 libabsl20220623
 libabw-0.1-1
 libaccounts-glib0
 libaccounts-qt5-1
 libacl1
 libaio1
-libalgorithm-diff-perl
-libalgorithm-diff-xs-perl
-libalgorithm-merge-perl
 libamd2
 libann0
 libao4
@@ -196,7 +189,6 @@ libayatana-appindicator1
 libayatana-indicator7
 libb2-1
 libbabl-0.1-0
-libbdplus0
 libbinutils
 libblas3
 libblkid1
@@ -236,7 +228,6 @@ libccid
 libccolamd2
 libcddb2
 libc-dev-bin
-libc-devtools
 libcdio19
 libcdio-cdda2
 libcdio-paranoia2
@@ -281,7 +272,6 @@ libdconf1
 libde265-0
 libdebconfclient0
 libdecor-0-0
-libdecor-0-plugin-1-cairo
 libdeflate0
 libdevmapper1.02.1
 libdevmapper-event1.02.1
@@ -342,11 +332,8 @@ libfdisk1
 libffi8
 libfftw3-double3
 libfido2-1
-libfile-fcntllock-perl
 libfile-pushd-perl
-libfl2
 libflac12
-libfl-dev
 libflite1
 libfontconfig1
 libfontconfig-dev
@@ -629,7 +616,6 @@ liblcms2-2
 libldacbt-abr2
 libldacbt-enc2
 libldap-2.5-0
-libldap-common
 libldb2
 liblerc4
 liblilv-0-0
@@ -643,7 +629,6 @@ liblognorm5
 liblqr-1-0
 liblsan0
 libltdl7
-libltdl-dev
 liblua5.2-0
 liblua5.3-0
 liblvm2cmd2.03
@@ -775,7 +760,6 @@ libpkgconf3
 libplacebo208
 libplist3
 libpng16-16
-libpng-tools
 libpocketsphinx3
 libpodofo0.9.8
 libpolkit-agent-1-0
@@ -895,7 +879,6 @@ librtmp1
 librubberband2
 libsamplerate0
 libsasl2-2
-libsasl2-modules
 libsasl2-modules-db
 libsbc1
 libsdl1.2debian
@@ -955,7 +938,6 @@ libssh-gcrypt-4
 libssl3
 libstaroffice-0.0-0
 libstartup-notification0
-libstdc++-12-dev
 libstdc++6
 libstemmer0d
 libstoken1
@@ -1186,11 +1168,9 @@ pipewire-pulse
 pkgconf
 pkgconf-bin
 plasma-framework
-pocketsphinx-en-us
 polkitd
 poppler-data
 poppler-utils
-publicsuffix
 pyqt6-dev-tools
 python3.11
 python3.11-dev
@@ -1301,7 +1281,6 @@ sound-theme-freedesktop
 sse3-support
 ssl-cert
 system-config-printer-common
-thin-provisioning-tools
 tpm-udev
 ucf
 uidmap

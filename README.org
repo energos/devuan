@@ -117,8 +117,17 @@ or
 #+end_src
 
 #+begin_src bash
-  apt install openssh-server openssh-client gawk mawk- locales man-db manpages manpages-dev pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag build-essential fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan apt-rdepends  imagemagick rpm sqlite3 lsb-release zstd unzip daemon dosfstools eject rsync fakeroot
+  apt install openssh-server openssh-client gawk mawk- locales man-db manpages manpages-dev pciutils file traceroute mime-support lsof curl wget plocate nmap ncat bc psmisc git silversearcher-ag gcc libc6-dev libc-devtools fortune-mod fortunes fortunes-debian-hints flex bison aptitude debootstrap gpm chrony ncal evtest ripgrep htop ckermit tio deborphan apt-rdepends rpm sqlite3 lsb-release zstd unzip daemon dosfstools eject rsync fakeroot
 #+end_src
+
+#+begin_src bash
+  apt install --install-recommends imagemagick
+#+end_src
+#+begin_example
+The following additional packages will be installed:
+  imagemagick-6.q16 libdjvulibre-text libdjvulibre21 libmagickcore-6.q16-6-extra
+  libnetpbm11 netpbm
+#+end_example
 
 * Kernel
 #+begin_src bash
@@ -194,8 +203,6 @@ or
   apt install -t daedalus-backports emacs-gtk emacs-common-non-dfsg
   apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev
 #+end_src
-
-####################################################################################################
 
 * Office
 #+begin_src bash
@@ -279,17 +286,53 @@ As normal user:
 
 * WTF
 ** Stranger Things
-- libaacs0 libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libbdplus0 libc-devtools libdecor-0-plugin-1-cairo libdjvulibre21 libdjvulibre-text libfile-fcntllock-perl libfl2 libfl-dev libldap-common libltdl-dev libmagickcore-6.q16-6-extra libnetpbm11 libpng-tools libsasl2-modules netpbm pocketsphinx-en-us publicsuffix thin-provisioning-tools seatd
+- apparmor                                 purge
+- arch-test                                purge
+- evemu-tools                              purge
+  + libevemu3                              purge
+- libpng-tools                             purge
+- libsasl2-modules                         purge
+- mpv recommends pocketsphinx-en-us        purge
+- wget recommends publicsuffix             purge
+- lvm2 recommends thin-provisioning-tools  purge
+- seatd                                    uninstalled
+- libltdl-dev                              purge?
+- libldap-common                           purge
+- libfl2                                   purge?
+- libfl-dev                                purge?
+- libfile-fcntllock-perl                   purge build-essential
+- libdecor-0-plugin-1-cairo                purged
+- libc-devtools                            manual
+- build-essentials depends dpkg-dev        purged
+  + dpkg-dev recommends or pulls           purged
+    - libalgorithm-diff-perl               purged
+    - libalgorithm-diff-xs-perl            purged
+    - libalgorithm-merge-perl              purged
+- mpv depends libbluray2
+  + libbluray2 recommends libaacs0         purged
+    - libaacs0 depends libbdplus0          purged
+- Imagemagick recommends                   --install-recommends
+  + libdjvulibre21
+  + libdjvulibre-text
+  + libmagickcore-6.q16-6-extra
+  + libnetpbm11
+  + netpbm
+
 ** Why?
 - /sbin/resolvconf: 230: /lib/resolvconf/libc: cannot create /etc/resolv.conf: Directory nonexistent
 
 * The Whole Enchilada
 #+begin_src bash
-aptitude search '!~M ~i' -F '%p' | sort -f > packages.manual.txt && aptitude search '~M ~i' -F '%p' | sort -f > packages.auto.txt && aptitude search '~i' -F '%p' | sort -f > packages.all.txt && echo OK
+  bin/packages-list
 #+end_src
-- [[file:packages.manual.txt][Manually installed packages]]
-- [[file:packages.auto.txt][Automatically installed packages]]
+- [[file:packages.all-manual.txt][All Manually installed packages]]
+- [[file:packages.all-auto.txt][All Automatically installed packages]]
 - [[file:packages.all.txt][All installed packages]]
+- [[file:packages.nbp-manual.txt][Non Backports Manually installed packages]]
+- [[file:packages.nbp-auto.txt][Non Backports Automatically installed packages]]
+- [[file:packages.bp-manual.txt][Backports Manually installed packages]]
+- [[file:packages.bp-auto.txt][Backports Automatically installed packages]]
+
 * Foreign partitions
 : mount UUID=bed5cbc3-3d88-4091-b687-96679440b6c0 /mnt/Energos/
 : mount UUID=a63767c2-0ab6-469b-a39d-f8db4a2ca1e0 /mnt/Depot/
