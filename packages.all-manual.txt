@@ -126,6 +126,7 @@ iproute2
 iputils-ping
 isc-dhcp-client
 isc-dhcp-common
+jq
 kate
 kcolorchooser
 kdegraphics-thumbnailers
@@ -140,6 +141,7 @@ less
 libc-devtools
 libdata-dump-perl
 libffi-dev
+libgtk-3-bin
 libgtk3-perl
 libmtp-runtime
 libpaper-utils

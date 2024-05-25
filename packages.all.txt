@@ -249,6 +249,7 @@ isc-dhcp-client
 isc-dhcp-common
 iso-codes
 iucode-tool
+jq
 kate
 kate5-data
 kbd
@@ -551,6 +552,7 @@ libgstreamer-plugins-base1.0-0
 libgtk2.0-0
 libgtk2.0-common
 libgtk-3-0
+libgtk-3-bin
 libgtk-3-common
 libgtk3-perl
 libgtkmm-3.0-1v5
@@ -596,6 +598,7 @@ libjbig0
 libjbig2dec0
 libjpeg62-turbo
 libjpeg-turbo-progs
+libjq1
 libjs-jquery
 libjson-c5
 libjsoncpp25
@@ -852,6 +855,7 @@ libokteta3core0
 libokteta3gui0
 libokteta-l10n
 libokular5core10
+libonig5
 libopenal1
 libopenal-data
 libopenconnect5

@@ -449,6 +449,7 @@ libjbig0
 libjbig2dec0
 libjpeg62-turbo
 libjpeg-turbo-progs
+libjq1
 libjs-jquery
 libjson-c5
 libjsoncpp25
@@ -704,6 +705,7 @@ libokteta3core0
 libokteta3gui0
 libokteta-l10n
 libokular5core10
+libonig5
 libopenal1
 libopenal-data
 libopenconnect5
