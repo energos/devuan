@@ -320,6 +320,10 @@ As normal user:
 
 ** Why?
 - /sbin/resolvconf: 230: /lib/resolvconf/libc: cannot create /etc/resolv.conf: Directory nonexistent
+- At boot, before asking the encryption password
+  + "error: no such device: /.disk/info."
+  + "error: no such device: /.disk/mini-info."
+  + dumb "solution": copy /boot/efi/EFI/BOOT to /boot/efi/EFI/debian
 
 * The Whole Enchilada
 #+begin_src bash
