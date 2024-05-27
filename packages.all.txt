@@ -105,6 +105,7 @@ dict
 dictionaries-common
 diffutils
 dirmngr
+djvulibre-bin
 dmeventd
 dmidecode
 dmsetup
@@ -684,6 +685,8 @@ libkf5kcmutils-data
 libkf5kdcraw5
 libkf5kdegames7
 libkf5kexiv2-15.0.0
+libkf5khtml5
+libkf5khtml-data
 libkf5kiocore5
 libkf5kiofilewidgets5
 libkf5kiogui5
@@ -790,6 +793,7 @@ libmagickcore-6.q16-6
 libmagickcore-6.q16-6-extra
 libmagickwand-6.q16-6
 libmagic-mgc
+libmarkdown2
 libmatroska7
 libmbedcrypto7
 libmd0
@@ -1342,6 +1346,7 @@ obconf
 ocl-icd-libopencl1
 okteta
 okular
+okular-extra-backends
 openbox
 openresolv
 opensc

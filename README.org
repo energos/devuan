@@ -190,7 +190,7 @@ The following additional packages will be installed:
 
 * KDE Stuff
 #+begin_src bash
-  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin filelight kate kompare kpat ktorrent okteta okular kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 pkexec kruler kcolorchooser
+  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin filelight kate kompare kpat ktorrent okteta okular okular-extra-backends kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 pkexec kruler kcolorchooser
 #+end_src
 
 * MPV
@@ -201,7 +201,7 @@ The following additional packages will be installed:
 * Emacs
 #+begin_src bash
   apt install -t daedalus-backports emacs-gtk emacs-common-non-dfsg
-  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev
+  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev libz-dev make pkg-config cmake libtool libvterm-dev djvulibre-bin
 #+end_src
 
 * Office
@@ -320,12 +320,16 @@ As normal user:
 
 ** Why?
 - /sbin/resolvconf: 230: /lib/resolvconf/libc: cannot create /etc/resolv.conf: Directory nonexistent
-- At boot, before asking the encryption password
+- Warnings at boot, before asking the encryption password
   + "error: no such device: /.disk/info."
   + "error: no such device: /.disk/mini-info."
   + dumb "solution": copy /boot/efi/EFI/BOOT to /boot/efi/EFI/debian
-
+- Okular does not open .djvu files
+  + install okular-extra-backends
+- Emacs does not open .djvu files
+  + install djvulibre-bin
 * The Whole Enchilada
+- [[file:bin/packages-list][bin/packages-list]]
 #+begin_src bash
   bin/packages-list
 #+end_src

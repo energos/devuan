@@ -57,6 +57,7 @@ devuan-keyring
 dfu-util
 dict
 diffutils
+djvulibre-bin
 dmidecode
 dolphin
 dolphin-plugins
@@ -190,6 +191,7 @@ nmap
 obconf
 okteta
 okular
+okular-extra-backends
 openbox
 openresolv
 openssh-client
