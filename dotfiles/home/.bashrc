@@ -18,12 +18,6 @@ fi
 
 unset PROMPT_COMMAND
 
-# Load host/user specific configuration
-if [[ -f ~/.pqprc ]]; then
-    eval $(grep '^ALSA_CARD=' ~/.pqprc)
-    eval $(grep '^DPI=' ~/.pqprc)
-fi
-
 # preserve history
 HISTFILESIZE=100000
 HISTSIZE=100000
@@ -39,7 +33,7 @@ export BLOCKSIZE=M
 # your favorite editor is ~/bin/emacs-nox
 export EDITOR=emacs-nox
 
-if [ -f ~/.bash_aliases ]; then
+if [[ -f ~/.bash_aliases ]]; then
   . ~/.bash_aliases
 fi
 
@@ -61,18 +55,7 @@ unset DPI
 
 export MC_XDG_OPEN=nohup-open
 
-# https://github.com/hedning/nix-bash-completions
-[[ -d $HOME/.nix-profile ]] && export XDG_DATA_DIRS="$HOME/.nix-profile/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
-
-# Export ALSA_CARD if defined in ~/.pqprc
-[[ -n $ALSA_CARD ]] && export ALSA_CARD
-
 stty -ixon
-
-# FreeBSD
-[[ -r /usr/local/share/bash-completion/bash_completion.sh ]] && source /usr/local/share/bash-completion/bash_completion.sh
-# Debian/Devuan
-[[ -r /etc/bash_completion ]] && source /etc/bash_completion
 
 # prompt
 if [[ ${EUID} == 0 ]] ; then
