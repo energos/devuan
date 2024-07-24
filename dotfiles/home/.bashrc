@@ -30,8 +30,15 @@ HISTCONTROL=ignoreboth
 # list size in megabytes
 export BLOCKSIZE=M
 
-# your favorite editor is ~/bin/emacs-nox
-export EDITOR=emacs-nox
+# your favorite editor
+for EDITOR in emacs-nox zile nano
+do
+    if [[ -x $(command -v $EDITOR) ]]; then
+        export EDITOR
+        break
+    fi
+    unset EDITOR
+done
 
 if [[ -f ~/.bash_aliases ]]; then
   . ~/.bash_aliases
