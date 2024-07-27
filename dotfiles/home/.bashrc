@@ -64,6 +64,8 @@ export MC_XDG_OPEN=nohup-open
 
 stty -ixon
 
+[[ -r /etc/bash_completion ]] && source /etc/bash_completion
+
 # prompt
 if [[ ${EUID} == 0 ]] ; then
     PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
