@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire /usr/bin/pipewire
+daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire-wireplumber /usr/bin/wireplumber
+daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire-pulse /usr/bin/pipewire-pulse
