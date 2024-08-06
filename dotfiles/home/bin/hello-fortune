@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+if command -v fortune > /dev/null ; then
+    if command -v kdialog > /dev/null ; then
+        while kdialog --title "Today's Fortune" --warningcontinuecancel "$(fortune)" --continue-label "Another" --cancel-label "Done"; do :; done &
+    else
+        while fortune | col -x | iconv -f UTF-8 -t ISO-8859-1 | LANG=C xmessage -buttons Done:1,Another:0 -default Done -file - ; do :; done &
+    fi
+else
+    if command -v kdialog > /dev/null ; then
+	kdialog --title "Sorry" --error "No fortune available!" &
+    else
+        LANG=C xmessage -buttons OK -default OK "Sorry, no fortune available!" &
+    fi
+fi
