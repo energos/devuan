@@ -348,6 +348,11 @@ Move point to the previous position that is the beggining of a symbol."
 (global-set-key (kbd "H-A") 'unhighlight-all-windows)
 (global-set-key (kbd "H-a") 'unhighlight)
 
+;; --- Insert key ---
+;; I keep accidentally hitting that damn key
+(global-set-key (kbd "<insert>") (lambda () (interactive) (overwrite-mode -1)))
+(global-set-key (kbd "H-<insert>") 'overwrite-mode)
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; AREA 51
 
