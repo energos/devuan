@@ -142,8 +142,6 @@
            ("<M-tab>"       . nil)
            :map magit-section-mode-map
            ("<M-tab>"       . nil))
-;; Syntax highlight for git commit messages
-;; (require 'git-commit)
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html
 (setq auto-revert-check-vc-info t)
 
