@@ -7,7 +7,8 @@
 ;; resize initial frame to 1/2 screen width
 ;; temporary ugly hack
 (sleep-for 0.1)
-(set-frame-width nil 146)
+(set-frame-width nil (if (= (default-font-width) 11) 173 146))
+(set-frame-parameter nil 'energos/width 10)
 
 (desktop-save-mode)                     ; restore desktop, except
 (setq desktop-restore-frames nil)       ; for window and frame configuration
@@ -195,6 +196,27 @@ Else go to the opening parenthesis one level up."
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
 
+(defun energos/inc-or-dec (n max &optional dec)
+  "Increment or decrement N, limiting the result to the interval 0≤N≤MAX.
+If DEC is t:             Return N-1 if 0<N≤MAX, 0 if N≤0, MAX if N>MAX.
+If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
+  (or (integerp n) (setq n 0))                ; must be an integer
+  (setq n (or (and dec (1- n)) (1+ n)))       ; increment or decrement
+  (or (and (< n 0) 0) (and (> n max) max) n)) ; limit to the valid range
+
+(defun energos/resize-frame (&optional dec)
+  "If DEC is t, decrease current frame size, else increase current frame size."
+  (interactive "P")
+  (let* ((list11 [64 75 86 97 108 118 129 140 151 162 173 184 195 206 217 228 238 249 260 271 282 293 304 315 326 337 347])
+         (list13 [54 63 72 82  91 100 109 119 128 137 146 156 165 174 183 192 202 211 220 230 239 248 257 266 276 285 294])
+         (list (if (= (default-font-width) 11) list11 list13))
+         (n (frame-parameter nil 'energos/width))
+         (i (energos/inc-or-dec (if (integerp n) n 4) (1- (length list)) dec))
+         (width (aref list i)))
+    (set-frame-parameter nil 'energos/width i)
+    (set-frame-width nil width)
+    (message (format "Frame width resized to %d characters" width))))
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYBOARD SHORTCUTS
 
@@ -261,6 +283,12 @@ Move point to the previous position that is the beggining of a symbol."
                 (lambda () "Reload buffer from disk if modified."
                   (interactive)
                   (revert-buffer t (not (buffer-modified-p)) t)))
+
+;; --- Frame resize ---
+(global-set-key (kbd "<f11>") 'energos/resize-frame)
+(global-set-key (kbd "S-<f11>")
+                (lambda () (interactive) (energos/resize-frame t)))
+(global-set-key (kbd "M-<f11>") 'toggle-frame-fullscreen)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; AREA 51
