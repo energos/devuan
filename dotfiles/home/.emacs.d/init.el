@@ -364,10 +364,45 @@ Move point to the previous position that is the beggining of a symbol."
 (global-set-key (kbd "H-A") 'unhighlight-all-windows)
 (global-set-key (kbd "H-a") 'unhighlight)
 
+;; --- Frequently used files ---
+(global-set-key (kbd "\e\ei") (lambda () (interactive) (find-file (expand-file-name "init.el" user-emacs-directory))))
+(global-set-key (kbd "\e\es") (lambda () (interactive) (switch-to-buffer "*scratch*")))
+
 ;; --- Insert key ---
 ;; I keep accidentally hitting that damn key
 (global-set-key (kbd "<insert>") (lambda () (interactive) (overwrite-mode -1)))
 (global-set-key (kbd "H-<insert>") 'overwrite-mode)
+
+;; --- Switch buffer ---
+(global-set-key (kbd "H-b") 'switch-to-buffer)
+
+;; --- Kill buffers ---
+(global-set-key (kbd "C-x K") 'kill-buffer)
+(global-set-key (kbd "H-K") 'kill-buffer)
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
+(global-set-key (kbd "H-k") 'kill-current-buffer)
+;; Never kill *scratch* or *Messages*
+(with-current-buffer "*scratch*"
+  (emacs-lock-mode 'kill))
+(with-current-buffer "*Messages*"
+  (emacs-lock-mode 'kill))
+
+;; --- find/save/exit ---
+(global-set-key (kbd "H-s") 'save-buffer)
+(global-set-key (kbd "H-f") 'find-file)
+(global-set-key (kbd "H-Q") 'save-buffers-kill-terminal)
+
+;; -- frames/windows --
+(global-set-key (kbd "H-n") 'make-frame-command)
+(global-set-key (kbd "H-0")
+                (lambda () "Delete window or delete frame if there is only one window."
+                  (interactive)
+                  (if (one-window-p)
+                      (delete-frame)
+                    (delete-window))))
+(global-set-key (kbd "H-1") 'delete-other-windows)
+(global-set-key (kbd "H-2") 'split-window-below)
+(global-set-key (kbd "H-3") 'split-window-horizontally)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; AREA 51
