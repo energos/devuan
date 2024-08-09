@@ -94,6 +94,22 @@
                                      "\n")))
               string))))
 
+;; --- webjump ---
+(setq webjump-sites
+      '(
+        ("Emacs Home Page"      . "https://www.gnu.org/software/emacs/")
+        ("Awesome Emacs"        . "https://github.com/emacs-tw/awesome-emacs")
+        ("Emacs Wiki"           . "https://www.emacswiki.org")
+        ("The other Emacs Wiki" . "https://wikemacs.org")
+        ("It's Magit!"          . "https://magit.vc/")
+        ("Devuan Home Page"     . "https://www.devuan.org/")
+        ("Devuan Forum"         . "https://dev1galaxy.org/")
+        ("Devuan Packages"      . "https://pkginfo.devuan.org/")
+        ("Common Lisp"          . "https://lisp-lang.org/")
+        ("Awesome Common Lisp"  . "https://github.com/CodyReichert/awesome-cl")
+        ))
+(global-set-key (kbd "H-w") 'webjump)
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LOCAL elisp FILES
 
