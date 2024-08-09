@@ -101,6 +101,7 @@
         ("Awesome Emacs"        . "https://github.com/emacs-tw/awesome-emacs")
         ("Emacs Wiki"           . "https://www.emacswiki.org")
         ("The other Emacs Wiki" . "https://wikemacs.org")
+        ("Emacs Rocks!"         . "https://emacsrocks.com/")
         ("It's Magit!"          . "https://magit.vc/")
         ("Devuan Home Page"     . "https://www.devuan.org/")
         ("Devuan Forum"         . "https://dev1galaxy.org/")
@@ -160,6 +161,11 @@
            ("<M-tab>"       . nil))
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html
 (setq auto-revert-check-vc-info t)
+
+;; expand-region
+;; https://github.com/magnars/expand-region.el
+(require 'expand-region)
+(bind-keys ("C-=" . er/expand-region))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
