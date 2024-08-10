@@ -167,6 +167,23 @@
 (require 'expand-region)
 (bind-keys ("C-=" . er/expand-region))
 
+;; vertico
+;; https://github.com/minad/vertico
+(require 'vertico)
+(vertico-mode)
+(setq vertico-count 20)
+
+;; orderless
+;; https://github.com/oantolin/orderless
+(require 'orderless)
+(setq completion-styles '(orderless basic)
+      completion-category-overrides '((file (styles basic partial-completion))))
+
+;; marginalia
+;; https://github.com/minad/marginalia
+(require 'marginalia)
+(marginalia-mode)
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
 
@@ -183,6 +200,8 @@
 ;; (enable-theme 'charcoal-black)
 (load-theme 'afternoon t t)
 (enable-theme 'afternoon)
+;; increase selected line visibility in vertico
+(set-face-attribute 'highlight nil :background "#294F6E")
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DEFUNs
