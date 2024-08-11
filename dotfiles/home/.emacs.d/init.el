@@ -184,6 +184,17 @@
 (require 'marginalia)
 (marginalia-mode)
 
+;; consult
+;; https://github.com/minad/consult
+(require 'consult)
+(bind-keys ("M-i"     . consult-line)
+           ("M-y"     . consult-yank-from-kill-ring)
+           ("C-x b"   . consult-buffer)
+           ("H-b"     . consult-buffer))
+;; disable previews
+(consult-customize
+ consult-buffer :preview-key nil)
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
 
@@ -399,7 +410,8 @@ Move point to the previous position that is the beggining of a symbol."
 (global-set-key (kbd "H-<insert>") 'overwrite-mode)
 
 ;; --- Switch buffer ---
-(global-set-key (kbd "H-b") 'switch-to-buffer)
+(global-set-key (kbd "C-x C-b") 'switch-to-buffer)
+(global-set-key (kbd "C-H-b") 'switch-to-buffer)
 
 ;; --- Kill buffers ---
 (global-set-key (kbd "C-x K") 'kill-buffer)
