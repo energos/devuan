@@ -134,6 +134,13 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+;; which-key
+;; https://github.com/justbur/emacs-which-key
+;; "which-key is now included in the master branch of Emacs and will likely be released with Emacs v30"
+(require 'which-key)
+(setq which-key-idle-delay 3.0)
+(which-key-mode)
+
 ;; pdf-tools
 ;; https://github.com/vedang/pdf-tools
 (require 'pdf-tools)
