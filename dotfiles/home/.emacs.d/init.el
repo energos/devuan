@@ -2,7 +2,8 @@
 ;; PREFERENCES
 
 ;; font
-(set-frame-font "Hack 10" nil t)
+;; (set-frame-font "Hack 10" nil t)
+(set-frame-font "Iosevka Term 10" nil t)
 
 ;; resize initial frame to 1/2 screen width
 ;; temporary ugly hack
