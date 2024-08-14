@@ -326,6 +326,40 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
         (unhighlight-regexp regexp)))))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ORG-MODE
+
+;; --- preferences ---
+(setq org-replace-disputed-keys t)
+
+;; --- restore old shortcuts for structure templates ---
+;; https://orgmode.org/manual/Structure-Templates.html
+(require 'org-tempo)
+
+;; --- org-babel ---
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (shell . t)
+   (emacs-lisp . t)
+   (C . t)
+   (python . t)
+   (forth . t)
+   ))
+
+;; --- DANGER! ---
+;; Evaluate code without prompting
+;; https://orgmode.org/manual/Code-Evaluation-Security.html
+;; --- DANGER! ---
+(setq org-confirm-babel-evaluate
+      (lambda (lang body)
+        (not (or
+              ;; t                        ; ask nothing
+              (string= lang "elisp")
+              (string= lang "C")
+              (string= lang "bash")
+              ))))
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYBOARD SHORTCUTS
 
 ;; --- Use hippie-expand instead of dabbrev-expand ---
