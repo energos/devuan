@@ -1,0 +1,111 @@
+#+TITLE: Devuan GNU+Linux
+#+OPTIONS: toc:nil num:nil html-postamble:nil
+#+STARTUP: showall
+
+* Do not install recommends
+#+begin_src bash :results file :file "dotfiles/etc/apt/apt.conf.d/90norecommends"
+  cat <<EOF
+  APT::Install-Recommends "0";
+  APT::Install-Suggests "0";
+  EOF
+#+end_src
+
+#+RESULTS:
+[[file:dotfiles/etc/apt/apt.conf.d/90norecommends]]
+
+* Essential packages
+#+begin_src bash :noeval
+  apt install mc tmux bat zile htop btop fzf fonts-dejavu fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode xdotool wmctrl xclip barrier qiv build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
+#+end_src
+
+* Unneeded packages
+#+begin_src bash :noeval
+  aptitude purge openntpd gdb-minimal kmouth brltty kdeaccessibility
+#+end_src
+
+* configure
+#+begin_src bash :noeval
+  dpkg-reconfigure debconf
+  dpkg-reconfigure locales
+  dpkg-reconfigure tzdata
+  dpkg-reconfigure keyboard-configuration
+  dpkg-reconfigure console-setup
+#+end_src
+
+* dotfiles
+#+begin_src bash :noeval
+  mkdir -p ~/Work
+  cd ~/Work
+  git clone git@github.com:energos/dotfiles
+  git clone git@github.com:energos/devuan
+#+end_src
+
+#+begin_src bash :noeval
+  mv ~/.bashrc ~/.bashrc.original
+  ln -s Work/devuan/dotfiles/home/.bashrc ~/.bashrc
+  ln -s Work/devuan/dotfiles/home/.gitconfig ~/.gitconfig
+  ln -s Work/devuan/dotfiles/home/.gitignore ~/.gitignore
+  ln -s Work/devuan/dotfiles/home/.inputrc ~/.inputrc
+  ln -s Work/devuan/dotfiles/home/.tmux.conf ~/.tmux.conf
+#+end_src
+
+#+begin_src bash :noeval
+  su -
+  mv ~/.bashrc ~/.bashrc.original
+  cp /home/lefty/Work/devuan/dotfiles/root/.bashrc ~/
+  cp /home/lefty/Work/devuan/dotfiles/root/.inputrc ~/
+  cp /home/lefty/Work/devuan/dotfiles/root/.tmux.conf ~/
+  exit
+#+end_src
+* sound
+#+begin_src bash :noeval
+  apt install -t daedalus-backports --install-recommends pipewire-audio
+  aptitude purge pulseaudio
+  apt install -t daedalus-backports --install-recommends mpv cmus
+  apt install daemon
+  apt install gkrellm gkrellm-volume
+#+end_src
+* konsole
+- Settings -> Configure Konsole (Ctrl+Shift+,)
+  + Profiles -> New
+- Edit Profile
+  + General - General Settings
+    - mark "Default profile" 
+    - Initial directory: $HOME
+    - unmark "Start in same directory as current session"
+    - Initial terminal size: 86x26
+  + Scrolling
+    - Scrollbar position: Hidden
+    - unmark Highlighting
+- General
+  + unmark "Remember windows size"
+- Tab Bar
+  + Position: Above terminal area
+  + Show Close Tab button: None
+* Shortcuts
+- krunner - Meta+Space
+
+* ~/bin
+#+begin_src bash :noeval
+  mkdir -p ~/bin
+  ln -s ../Work/devuan/dotfiles/home/bin/nohup-open ~/bin/hohup-open
+  ln -s ../Work/devuan/dotfiles/home/bin/hello-fortune ~/bin/hello-fortune
+  ln -s ../Work/devuan/dotfiles/home/bin/pipewire-start ~/bin/pipewire-start
+#+end_src
+
+* iosevka font
+#+begin_src bash :noeval
+  mkdir -p ~/.local/share/fonts
+  ln -s ../../../Work/devuan/dotfiles/home/.local/share/fonts/Iosevka  ~/.local/share/fonts/Iosevka
+#+end_src
+
+* kde/plasma autostart
+- Start up and Shutdown -> Autostart -> Add Login Script
+  + ~/bin/hello-fortune
+  + ~/bin/pipewire-start
+
+* emacs
+#+begin_src bash :noeval
+  aptitude install -t daedalus-backports emacs emacs-common-non-dfsg
+  aptitude install elpa-clues-theme elpa-pdf-tools elpa-vterm elpa-consult elpa-expand-region elpa-htmlize elpa-magit elpa-marginalia elpa-orderless elpa-vertico elpa-which-key elpa-embark
+#+end_src
