@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# ugly, ugly, ugly
+pgrep -x daemon && killall daemon
+sleep 0.5
+pgrep -x daemon && killall daemon
+sleep 0.5
 daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire /usr/bin/pipewire
 daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire-wireplumber /usr/bin/wireplumber
 daemon --respawn --pidfiles=$XDG_RUNTIME_DIR --name=pipewire-pulse /usr/bin/pipewire-pulse
