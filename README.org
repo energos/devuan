@@ -3,8 +3,8 @@
 #+STARTUP: showall
 
 * Do not install recommends
-#+begin_src bash :results file :file "dotfiles/etc/apt/apt.conf.d/90norecommends"
-  cat <<EOF
+#+begin_src bash :noeval
+  cat <<EOF > /etc/apt/apt.conf.d/90norecommends
   APT::Install-Recommends "0";
   APT::Install-Suggests "0";
   EOF
