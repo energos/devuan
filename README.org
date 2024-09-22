@@ -58,11 +58,11 @@ cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
 #+end_src
 
 #+begin_src bash :noeval
-  su -
+  su
   mv ~/.bashrc ~/.bashrc.original
-  cp /home/lefty/Work/devuan/dotfiles/root/.bashrc ~/
-  cp /home/lefty/Work/devuan/dotfiles/root/.inputrc ~/
-  cp /home/lefty/Work/devuan/dotfiles/root/.tmux.conf ~/
+  cp /home/$USER/Work/devuan/dotfiles/root/.bashrc ~/
+  cp /home/$USER/Work/devuan/dotfiles/root/.inputrc ~/
+  cp /home/$USER/Work/devuan/dotfiles/root/.tmux.conf ~/
   exit
 #+end_src
 * sound
