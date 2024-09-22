@@ -46,6 +46,7 @@ cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
   cd ~/Work
   git clone git@github.com:energos/dotfiles
   git clone git@github.com:energos/devuan
+  cd ~
 #+end_src
 
 #+begin_src bash :noeval
@@ -59,12 +60,17 @@ cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
 
 #+begin_src bash :noeval
   su
+#+end_src
+#+begin_src bash :noeval
   mv ~/.bashrc ~/.bashrc.original
   cp /home/$USER/Work/devuan/dotfiles/root/.bashrc ~/
   cp /home/$USER/Work/devuan/dotfiles/root/.inputrc ~/
   cp /home/$USER/Work/devuan/dotfiles/root/.tmux.conf ~/
+#+end_src
+#+begin_src bash :noeval
   exit
 #+end_src
+
 * sound
 #+begin_src bash :noeval
   apt install -t daedalus-backports --install-recommends pipewire-audio
