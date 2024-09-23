@@ -15,7 +15,7 @@
 
 * Essential packages
 #+begin_src bash :noeval
-  apt install mc tmux bat zile htop btop fzf fonts-dejavu fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode xdotool wmctrl xclip barrier qiv build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
+  apt install mc tmux bat zile htop btop fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
 #+end_src
 
 * Unneeded packages
@@ -35,9 +35,9 @@
 * VirtualBox Guest Additions
 - Devices -> Insert Guest Additions CD Image
 #+begin_src bash :noeval
-mount /media/cdrom0
-cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
-/tmp/VBoxLinuxAdditions.run
+  mount /media/cdrom0
+  cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
+  /tmp/VBoxLinuxAdditions.run
 #+end_src
 
 * dotfiles
@@ -71,6 +71,11 @@ cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
   exit
 #+end_src
 
+* Openbox
+#+begin_src bash :noeval
+  apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany gkrellm dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc parcellite librsvg2-common
+#+end_src
+
 * sound
 #+begin_src bash :noeval
   apt install -t daedalus-backports --install-recommends pipewire-audio
@@ -84,7 +89,7 @@ cp /media/cdrom0/VBoxLinuxAdditions.run /tmp
   + Profiles -> New
 - Edit Profile
   + General - General Settings
-    - mark "Default profile" 
+    - mark "Default profile"
     - Initial directory: $HOME
     - unmark "Start in same directory as current session"
     - Initial terminal size: 86x26
