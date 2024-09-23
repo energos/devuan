@@ -76,14 +76,15 @@
   apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany gkrellm dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc parcellite librsvg2-common
 #+end_src
 
-* sound
+* audio/video
 #+begin_src bash :noeval
   apt install -t daedalus-backports --install-recommends pipewire-audio
+  apt install pulseaudio-utils pulsemixer pamixer pavucontrol
   aptitude purge pulseaudio
   apt install -t daedalus-backports --install-recommends mpv cmus
   apt install daemon
-  apt install gkrellm gkrellm-volume
 #+end_src
+
 * konsole
 - Settings -> Configure Konsole (Ctrl+Shift+,)
   + Profiles -> New
