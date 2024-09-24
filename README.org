@@ -15,7 +15,7 @@
 
 * Essential packages
 #+begin_src bash :noeval
-  apt install mc tmux bat zile htop btop psmisc fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
+  apt install mc tmux bat zile htop btop psmisc ncal fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
 #+end_src
 
 * Unneeded packages
@@ -71,9 +71,12 @@
   exit
 #+end_src
 
-* Openbox
+* Openbox with a KDE spice
 #+begin_src bash :noeval
   apt install openbox obconf xorg xinit xterm xtermcontrol rxvt-unicode lxappearance gmrun barrier xdotool wmctrl picom xclip adwaita-icon-theme gnome-themes-extra suckless-tools xbindkeys xcape x11-utils feh qiv xdg-utils xdg-user-dirs xdg-desktop-portal-gtk xserver-xorg-video-intel xserver-xorg-video-radeon va-driver-all vdpau-driver-all mesa-vulkan-drivers fonts-open-sans fonts-inconsolata fonts-dejavu fonts-hack fonts-liberation geany gkrellm dict rofi dunst tint2 firefox-esr ca-certificates libpaper-utils catdoc parcellite librsvg2-common
+#+end_src
+#+begin_src bash
+  apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin kde-cli-tools filelight kate kompare kpat ktorrent okteta okular okular-extra-backends kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 pkexec kruler kcolorchooser
 #+end_src
 
 * audio/video
