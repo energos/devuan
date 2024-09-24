@@ -15,7 +15,7 @@
 
 * Essential packages
 #+begin_src bash :noeval
-  apt install mc tmux bat zile htop btop fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
+  apt install mc tmux bat zile htop btop psmisc fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64
 #+end_src
 
 * Unneeded packages
