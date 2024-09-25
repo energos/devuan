@@ -102,6 +102,7 @@
     - unmark Highlighting
 - General
   + unmark "Remember windows size"
+  + mark "Show window title on the titlebar"
 - Tab Bar
   + Position: Above terminal area
   + Show Close Tab button: None
