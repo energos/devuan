@@ -79,6 +79,18 @@
   apt install qt5ct breeze breeze-gtk-theme breeze-icon-theme dolphin kde-cli-tools filelight kate kompare kpat ktorrent okteta okular okular-extra-backends kde-spectacle kdegraphics-thumbnailers dolphin-plugins kio-extras libmtp-runtime polkit-kde-agent-1 pkexec kruler kcolorchooser
 #+end_src
 
+* obmenu-generator
+#+begin_src bash :noeval
+  apt install perl libdata-dump-perl libgtk3-perl cpanminus
+  cpanm Linux::DesktopFiles
+#+end_src
+
+#+begin_src bash :noeval
+  mkdir ~/.config/obmenu-generator
+  ln -s ../../Work/dotfiles/obmenu-generator/schema.pl ~/.config/obmenu-generator
+  ln -s ../Work/dotfiles/bin/obmenu-generator ~/bin/
+#+end_src
+
 * audio/video
 #+begin_src bash :noeval
   apt install -t daedalus-backports --install-recommends pipewire-audio
