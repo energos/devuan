@@ -140,8 +140,13 @@
   + ~/bin/hello-fortune
   + ~/bin/pipewire-start
 
-* emacs
+* Emacs
+#+begin_src bash
+  apt install -t daedalus-backports emacs emacs-common-non-dfsg
+  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev zlib1g-dev make pkg-config cmake libtool libvterm-dev djvulibre-bin
+#+end_src
+** Emacs packages
 #+begin_src bash :noeval
-  aptitude install -t daedalus-backports emacs emacs-common-non-dfsg
-  aptitude install elpa-clues-theme elpa-pdf-tools elpa-vterm elpa-consult elpa-expand-region elpa-htmlize elpa-magit elpa-marginalia elpa-orderless elpa-vertico elpa-which-key elpa-embark
+  # apt install elpa-clues-theme elpa-pdf-tools elpa-vterm elpa-consult elpa-expand-region elpa-htmlize elpa-magit elpa-marginalia elpa-orderless elpa-vertico elpa-which-key elpa-embark
+  apt install elpa-marginalia elpa-orderless elpa-vertico elpa-which-key
 #+end_src
