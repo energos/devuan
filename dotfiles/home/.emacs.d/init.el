@@ -138,26 +138,16 @@
 ;; which-key
 ;; https://github.com/justbur/emacs-which-key
 ;; "which-key is now included in the master branch of Emacs and will likely be released with Emacs v30"
-(require 'which-key)
+(unless (require 'which-key nil t)
+  (use-package which-key))
 (setq which-key-idle-delay 3.0)
 (which-key-mode)
-
-;; pdf-tools
-;; https://github.com/vedang/pdf-tools
-(require 'pdf-tools)
-(bind-keys :map pdf-view-mode-map
-           ("<home>"   . image-bob)
-           ("<end>"    . image-eob)
-           ("<C-home>" . pdf-view-first-page)
-           ("<C-end>"  . pdf-view-last-page))
-(pdf-tools-install)
-(setq-default pdf-view-display-size 'fit-page)
-;; (setq pdf-view-midnight-colors '("#eaeaea" . "#181a26"))
 
 ;; It's Magit!
 ;; https://magit.vc/
 ;; https://github.com/magit/magit
-(require 'magit)
+(unless (require 'magit nil t)
+  (use-package magit))
 (bind-keys ("C-x g"         . magit-status)
            ("H-m"           . magit-status)
            :map magit-hunk-section-map
@@ -172,7 +162,8 @@
 
 ;; expand-region
 ;; https://github.com/magnars/expand-region.el
-(require 'expand-region)
+(unless (require 'expand-region nil t)
+  (use-package expand-region))
 (bind-keys ("C-=" . er/expand-region))
 
 ;; vertico
@@ -194,7 +185,8 @@
 
 ;; consult
 ;; https://github.com/minad/consult
-(require 'consult)
+(unless (require 'consult nil t)
+  (use-package consult))
 (bind-keys ("M-i"     . consult-line)
            ("M-y"     . consult-yank-from-kill-ring)
            ("C-x b"   . consult-buffer)
@@ -202,6 +194,28 @@
 ;; disable previews
 (consult-customize
  consult-buffer :preview-key nil)
+
+;; pdf-tools
+;; https://github.com/vedang/pdf-tools
+(unless (require 'pdf-tools nil t)
+  (use-package pdf-tools
+    :demand t))
+(bind-keys :map pdf-view-mode-map
+           ("<home>"   . image-bob)
+           ("<end>"    . image-eob)
+           ("<C-home>" . pdf-view-first-page)
+           ("<C-end>"  . pdf-view-last-page))
+(pdf-tools-install)
+(setq-default pdf-view-display-size 'fit-page)
+;; (setq pdf-view-midnight-colors '("#eaeaea" . "#181a26"))
+
+;; vterm
+;; https://github.com/akermu/emacs-libvterm
+;; https://packages.gentoo.org/packages/app-emacs/vterm
+(unless (require 'vterm nil t)
+  (use-package vterm))
+(setq vterm-min-window-width 54)
+(setq vterm-clear-scrollback-when-clearing t)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
