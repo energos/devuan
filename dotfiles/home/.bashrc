@@ -18,6 +18,12 @@ fi
 
 unset PROMPT_COMMAND
 
+# Load host/user specific configuration
+if [[ -f ~/.pqprc ]]; then
+    eval $(grep '^ALSA_CARD=' ~/.pqprc)
+    eval $(grep '^DPI=' ~/.pqprc)
+fi
+
 # preserve history
 HISTFILESIZE=100000
 HISTSIZE=100000
@@ -61,6 +67,9 @@ alias startX="startx -- -dpi ${DPI:=96}"
 unset DPI
 
 export MC_XDG_OPEN=nohup-open
+
+# Export ALSA_CARD if defined in ~/.pqprc
+[[ -n $ALSA_CARD ]] && export ALSA_CARD
 
 stty -ixon
 
