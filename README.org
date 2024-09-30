@@ -149,6 +149,12 @@
 #+begin_src bash :noeval
   apt install elpa-vertico elpa-marginalia elpa-orderless
 #+end_src
+
+* Calibre
+#+begin_src bash :noeval
+  apt install calibre
+#+end_src
+
 * VPN
 #+begin_src bash :noeval
   apt install openvpn openresolv --install-recommends

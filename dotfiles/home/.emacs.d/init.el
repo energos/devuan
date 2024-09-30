@@ -209,6 +209,17 @@
 (setq-default pdf-view-display-size 'fit-page)
 ;; (setq pdf-view-midnight-colors '("#eaeaea" . "#181a26"))
 
+;; calibredb
+;; https://github.com/chenyanming/calibredb.el
+(use-package calibredb
+  :demand t
+  :config
+  (require 'consult)
+  (setq calibredb-root-dir "~/Library")
+  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  (setq calibredb-library-alist '(("~/Library")))
+  (setq calibredb-date-width 0))
+
 ;; vterm
 ;; https://github.com/akermu/emacs-libvterm
 ;; https://packages.gentoo.org/packages/app-emacs/vterm
