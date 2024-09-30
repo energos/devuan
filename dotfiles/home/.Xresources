@@ -1,0 +1,86 @@
+! ~/.Xresources
+
+#ifdef HIGH_DPI
+    #define FIXED_FONT -*-lucidatypewriter-medium-r-normal-*-25-*-*-*-*-*-*-*
+    #define CURSOR_SIZE 32
+#else
+    #define FIXED_FONT -misc-fixed-medium-r-normal-*-20-*-*-*-*-*-*-*
+    #define CURSOR_SIZE 16
+#endif
+
+#ifndef XSERVER_DPI
+    #define XSERVER_DPI 96
+#endif
+
+Xft.dpi:                XSERVER_DPI
+Xcursor.size:           CURSOR_SIZE
+
+#ifdef HIGH_DPI
+Emacs.font:             Iosevka Term 10
+#else
+!Emacs.font:             -misc-fixed-medium-r-normal-*-14-*-*-*-*-*-*-*
+Emacs.font:             -misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+#endif
+Emacs.verticalScrollBars: off
+Emacs.menuBar:          off
+Emacs.toolBar:          0
+Emacs.geometry:         108x56
+Emacs.cursorBlink:      off
+
+#ifdef HIGH_DPI
+xterm*SimpleMenu*font:  -xos4-terminus-medium-r-normal-*-28-*-*-*-*-*-*-*
+xterm*faceName:         Inconsolata:size=11
+#else
+!xterm*font:             -xos4-terminus-medium-r-normal-*-14-*-*-*-*-*-*-*
+!xterm*font:             -misc-fixed-medium-r-normal-*-14-*-*-*-*-*-*-*
+xterm*font:             -misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+#endif
+xterm*termName:         xterm-256color
+xterm*iconHint:         .local/share/icons/utilities-terminal.xpm
+!xterm*geometry:         80x26
+xterm*title:            Terminal
+!xterm*background:       black
+xterm*background:       #232627
+xterm*foreground:       white
+xterm*metaSendsEscape:  true
+xterm*backarrowKey:     false
+XTerm.ttyModes:         erase ^?
+
+#ifdef HIGH_DPI
+URxvt*font:             xft:Iosevka Term:size=10
+!URxvt.letterSpace:      0
+#else
+!URxvt*font:             -misc-fixed-medium-r-normal-*-14-*-*-*-*-*-*-*
+URxvt*font:             -misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+#endif
+URxvt*termName:         rxvt-unicode-256color
+URxvt*scrollBar:        false
+URxvt*savedLines:       1000
+URxvt*iso14755:         false
+URxvt*iso14755_52:      false
+URxvt*iconFile:         .local/share/icons/Utilities-terminal.svg
+URxvt*geometry:         86x26
+URxvt*title:            Terminal
+!https://stackoverflow.com/questions/50689490/list-of-control-sequences-in-033-for-urxvt-keysym
+URxvt.keysym.C-1:       command:\033]10;white\007\033]11;black\007
+URxvt.keysym.C-2:       command:\033]10;yellow\007\033]11;dark blue\007
+URxvt.keysym.C-3:       command:\033]10;dark blue\007\033]11;khaki\007
+URxvt.keysym.C-4:       command:\033]10;black\007\033]11;white\007
+!http://stackoverflow.com/questions/8254705/redhat-linux-change-directory-color/8254921#8254921
+!URxvt*background:       black
+URxvt*background:       #232627
+URxvt*foreground:       white
+URxvt.color4:           RoyalBlue
+URxvt.color12:          LightSteelBlue
+!URxvt.color7:           gray75
+!URxvt.colorBD:          #ffffff
+!URxvt.colorUL:          LightSlateGrey
+!URxvt.colorIT:          SteelBlue
+!URxvt.cursorColor:      grey90
+!URxvt.highlightColor:   grey25
+
+Xmessage*font:          FIXED_FONT
+Xmessage*nearMouse:     FALSE
+Xmessage*center:        TRUE
+XFontSel*font:          FIXED_FONT
+Xmag*font:              FIXED_FONT
