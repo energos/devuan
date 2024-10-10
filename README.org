@@ -48,24 +48,24 @@
 
 #+begin_src bash :noeval
   mv ~/.bashrc ~/.bashrc.original
-  ln -s Work/devuan/dotfiles/home/.bashrc ~/.bashrc
-  ln -s Work/devuan/dotfiles/home/.gitconfig ~/.gitconfig
-  ln -s Work/devuan/dotfiles/home/.gitignore ~/.gitignore
-  ln -s Work/devuan/dotfiles/home/.inputrc ~/.inputrc
-  ln -s Work/devuan/dotfiles/home/.tmux.conf ~/.tmux.conf
+  for a in .Xmodmap .Xresources .bash_profile .bashrc .gitconfig .gitignore .inputrc .tmux.conf .xbindkeysrc .xinitrc; do ln -s Work/devuan/dotfiles/home/${a} ~/${a}; done
 #+end_src
 
 #+begin_src bash :noeval
+  # BIG FAT WARNING! It is "su", not "su -"
   su
 #+end_src
 #+begin_src bash :noeval
   mv ~/.bashrc ~/.bashrc.original
-  cp /home/$USER/Work/devuan/dotfiles/root/.bashrc ~/
-  cp /home/$USER/Work/devuan/dotfiles/root/.inputrc ~/
-  cp /home/$USER/Work/devuan/dotfiles/root/.tmux.conf ~/
+  for a in .bash_profile .bashrc .inputrc .tmux.conf; do cp /home/${USER}/Work/devuan/dotfiles/root/${a} ~/; done
 #+end_src
 #+begin_src bash :noeval
   exit
+#+end_src
+
+#+begin_src bash :noeval
+  mkdir ~/bin
+  for a in emacs-nox emacs-git hello-fortune nohup-open obmenu-generator pipewire-start pqp urxvtcd; do ln -s ../Work/devuan/dotfiles/home/bin/${a} ~/bin/${a}; done
 #+end_src
 
 * Openbox with a KDE spice
@@ -85,7 +85,6 @@
 #+begin_src bash :noeval
   mkdir ~/.config/obmenu-generator
   ln -s ../../Work/dotfiles/obmenu-generator/schema.pl ~/.config/obmenu-generator
-  ln -s ../Work/dotfiles/bin/obmenu-generator ~/bin/
 #+end_src
 
 * audio/video
@@ -123,14 +122,6 @@
 * Shortcuts
 - krunner - Meta+Space
 
-* ~/bin
-#+begin_src bash :noeval
-  mkdir -p ~/bin
-  ln -s ../Work/devuan/dotfiles/home/bin/nohup-open ~/bin/hohup-open
-  ln -s ../Work/devuan/dotfiles/home/bin/hello-fortune ~/bin/hello-fortune
-  ln -s ../Work/devuan/dotfiles/home/bin/pipewire-start ~/bin/pipewire-start
-#+end_src
-
 * iosevka font
 #+begin_src bash :noeval
   mkdir -p ~/.local/share/fonts
@@ -167,3 +158,6 @@
 #+begin_src bash :noeval
   apt install openvpn openresolv --install-recommends
 #+end_src
+
+* ~/.local/share/applications
+* ~/.local/share/icons
