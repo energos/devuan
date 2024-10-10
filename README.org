@@ -10,12 +10,9 @@
   EOF
 #+end_src
 
-#+RESULTS:
-[[file:dotfiles/etc/apt/apt.conf.d/90norecommends]]
-
 * Essential packages
 #+begin_src bash :noeval
-  apt install mc tmux bat zile htop btop psmisc ncal fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64 qalc rsync
+  apt install mc tmux bc bat zile whois htop btop psmisc dosfstools ncal fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64 qalc rsync unzip
 #+end_src
 
 * Unneeded packages
@@ -93,11 +90,16 @@
 
 * audio/video
 #+begin_src bash :noeval
-  apt install -t daedalus-backports --install-recommends pipewire-audio
-  apt install pulseaudio-utils pulsemixer pamixer pavucontrol
-  aptitude purge pulseaudio
-  apt install -t daedalus-backports --install-recommends mpv cmus
+  apt install --install-recommends -t daedalus-backports pipewire-audio
+  apt install --install-recommends pulseaudio-utils pulsemixer pamixer pavucontrol alsa-utils
+  apt purge pulseaudio
+  apt install --install-recommends -t daedalus-backports mpv cmus
   apt install daemon
+#+end_src
+
+* Firmware
+#+begin_src bash :noeval
+  apt install --install-recommends firmware-linux-free firmware-linux-nonfree
 #+end_src
 
 * konsole
@@ -133,6 +135,12 @@
 #+begin_src bash :noeval
   mkdir -p ~/.local/share/fonts
   ln -s ../../../Work/devuan/dotfiles/home/.local/share/fonts/Iosevka  ~/.local/share/fonts/Iosevka
+#+end_src
+
+
+* Connman
+#+begin_src bash :noeval
+  apt install connman-gtk connman connman-vpn wpasupplicant
 #+end_src
 
 * kde/plasma autostart
