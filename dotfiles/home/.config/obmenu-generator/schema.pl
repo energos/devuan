@@ -1,0 +1,1 @@
+../../Work/dotfiles/obmenu-generator/schema.pl
