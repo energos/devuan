@@ -1,11 +1,9 @@
-deb http://deb.devuan.org/merged        daedalus           main contrib non-free non-free-firmware
-# deb-src http://deb.devuan.org/merged  daedalus           main contrib non-free non-free-firmware
+# deb http://deb.devuan.org/merged        daedalus           main contrib non-free non-free-firmware
+# deb http://deb.devuan.org/merged        daedalus-security  main contrib non-free non-free-firmware
+# deb http://deb.devuan.org/merged        daedalus-updates   main contrib non-free non-free-firmware
+# deb http://deb.devuan.org/merged        daedalus-backports main contrib non-free non-free-firmware
 
-deb http://deb.devuan.org/merged        daedalus-security  main contrib non-free non-free-firmware
-# deb-src http://deb.devuan.org/merged  daedalus-security   main contrib non-free non-free-firmware
-
-deb http://deb.devuan.org/merged        daedalus-updates   main contrib non-free non-free-firmware
-# deb-src http://deb.devuan.org/merged  daedalus-updates   main contrib non-free non-free-firmware
-
-deb http://deb.devuan.org/merged        daedalus-backports main contrib non-free non-free-firmware
-# deb-src http://deb.devuan.org/merged  daedalus-backports main contrib non-free non-free-firmware
+deb http://devuan.c3sl.ufpr.br/merged     daedalus           main contrib non-free non-free-firmware
+deb http://devuan.c3sl.ufpr.br/merged     daedalus-security  main contrib non-free non-free-firmware
+deb http://devuan.c3sl.ufpr.br/merged     daedalus-updates   main contrib non-free non-free-firmware
+deb http://devuan.c3sl.ufpr.br/merged     daedalus-backports main contrib non-free non-free-firmware
