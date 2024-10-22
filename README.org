@@ -12,6 +12,7 @@
 
 * Essential packages
 #+begin_src bash :noeval
+  dpkg-reconfigure debconf
   apt install mc tmux bc bat zile whois htop btop psmisc dosfstools ncal fzf fonts-terminus aptitude plocate evtest fortune-mod fortunes fortunes-debian-hints manpages-dev tldr silversearcher-ag neofetch ripgrep gawk mawk- curl rxvt-unicode build-essential gdb fakeroot autoconf automake libtool-bin flex bison cmake dkms chrony inotify-tools linux-headers-amd64 qalc rsync unzip
 #+end_src
 
@@ -22,7 +23,6 @@
 
 * configure
 #+begin_src bash :noeval
-  dpkg-reconfigure debconf
   dpkg-reconfigure locales
   dpkg-reconfigure tzdata
   dpkg-reconfigure keyboard-configuration
