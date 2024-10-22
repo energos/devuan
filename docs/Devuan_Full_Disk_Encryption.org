@@ -1,0 +1,266 @@
+#+TITLE: Devuan GNU+Linux Full Disk Encryption
+#+SUBTITLE:
+#+AUTHOR: Energos
+#+OPTIONS: toc:nil num:nil html-postamble:nil
+#+STARTUP: showall
+#+LATEX_CLASS_OPTIONS: [a4paper]
+
+* Disk partitioning, formatting and encryption
+** 120G /dev/sdd
+#+begin_example
+fdisk -l /dev/sdd
+  Disk /dev/sdd: 111.79 GiB, 120034123264 bytes, 234441647 sectors
+  Disk model: External
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: gpt
+  Disk identifier: 42B374E0-E003-E941-B3F0-1D224C3F3B3E
+
+  Device      Start       End   Sectors   Size Type
+  /dev/sdd1    2048    526335    524288   256M EFI System
+  /dev/sdd2  526336 234440703 233914368 111.5G Linux filesystem
+#+end_example
+
+#+begin_src bash :noeval
+  badblocks -c 8192 -s -w -t random -v /dev/sdd1
+  badblocks -c 8192 -s -w -t random -v /dev/sdd2
+
+  cryptsetup luksFormat --type luks1 /dev/sdd2
+  cryptsetup luksOpen /dev/sdd2 external1vg
+  vgcreate external1vg /dev/mapper/external1vg
+  lvcreate --name swap -L 2G external1vg
+  lvcreate --name root -l 100%FREE external1vg
+
+  mkfs.vfat -c -n EFI1 -F 32 /dev/sdd1
+  mkfs.ext4 -c -c -L ROOT1 /dev/external1vg/root
+  mkswap -c -L SWAP1 /dev/external1vg/swap
+
+  mkdir /mnt/debinst
+  mount /dev/external1vg/root /mnt/debinst/
+  swapon /dev/external1vg/swap
+
+  mkdir -p /mnt/debinst/boot/efi
+  mount /dev/sdd1 /mnt/debinst/boot/efi/
+#+end_src
+
+#+begin_example
+# lsblk -f /dev/sdd
+NAME                   FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sdd
+├─sdd1                 vfat        FAT32    EFI1  4A38-001D                                 252M     0% /mnt/debinst/boot/efi
+└─sdd2                 crypto_LUKS 1              787233f3-1dd5-4cf3-9f9f-15c591bc042a
+  └─external1vg        LVM2_member LVM2 001       Nlt6YD-DHws-CIOp-PtJB-QUL3-2m6h-0u4yfg
+    ├─external1vg-swap swap        1        SWAP1 cac89d67-e63a-4e02-a78c-d11755aaabfa                  [SWAP]
+    └─external1vg-root ext4        1.0      ROOT1 f6687cd3-7ef8-473d-bc7b-fe63d04e6db8    101.8G     0% /mnt/debinst
+#+end_example
+
+*** fstab
+#+begin_example
+#
+# See fstab(5).
+#
+# <file system>                           <dir>          <type> <options>   <dump> <pass>
+tmpfs                                     /tmp           tmpfs  nosuid,nodev    0   0
+proc                                      /proc          proc   defaults        0   0
+
+/dev/external1vg/root                     /              ext4   noatime,shared  0   1
+
+#/dev/external1vg/home                    /home          ext4   noatime         0   2
+/dev/external1vg/swap                     swap           swap   defaults        0   0
+
+UUID=4A38-001D                            /boot/efi      vfat   defaults        0   2
+#+end_example
+*** crypttab
+#+begin_example
+external1vg UUID=787233f3-1dd5-4cf3-9f9f-15c591bc042a  /boot/volume.key  luks
+#+end_example
+*** LUKS key
+#+begin_src bash
+  dd bs=1 count=64 if=/dev/urandom of=/boot/volume.key
+  cryptsetup luksAddKey /dev/sdd2 /boot/volume.key
+  chmod 000 /boot/volume.key
+  chmod -R g-rwx,o-rwx /boot
+#+end_src
+
+** 500G /dev/sda
+#+begin_example
+fdisk -l /dev/sda
+  Disk /dev/sda: 465.76 GiB, 500107862016 bytes, 976773168 sectors
+  Disk model: ST500LM012 HN-M5
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 4096 bytes
+  I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+  Disklabel type: gpt
+  Disk identifier: F2CFB31A-B13E-C540-9B9D-07C0900057E5
+
+  Device      Start       End   Sectors   Size Type
+  /dev/sda1    2048    526335    524288   256M EFI System
+  /dev/sda2  526336 976773119 976246784 465.5G Linux filesystem
+#+end_example
+
+#+begin_src bash :noeval
+  badblocks -c 8192 -s -w -t random -v /dev/sda1
+  badblocks -c 8192 -s -w -t random -v /dev/sda2
+
+  cryptsetup luksFormat --type luks1 /dev/sda2
+  cryptsetup luksOpen /dev/sda2 sloppy1vg
+  vgcreate sloppy1vg /dev/mapper/sloppy1vg
+  lvcreate --name swap -L 2G sloppy1vg
+  lvcreate --name root -l 100%FREE sloppy1vg
+
+  mkfs.vfat -c -n EFI1 -F 32 /dev/sda1
+  mkfs.ext4 -c -c -L ROOT1 /dev/sloppy1vg/root
+  mkswap -c -L SWAP1 /dev/sloppy1vg/swap
+
+  mkdir /mnt/debinst
+  mount /dev/sloppy1vg/root /mnt/debinst/
+  swapon /dev/sloppy1vg/swap
+
+  mkdir -p /mnt/debinst/boot/efi
+  mount /dev/sda1 /mnt/debinst/boot/efi/
+#+end_src
+
+#+begin_example
+# lsblk -f /dev/sda
+NAME                 FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda
+├─sda1               vfat        FAT32    EFI1  BC1D-7F2B                                 252M     0% /mnt/debinst/boot/efi
+└─sda2               crypto_LUKS 1              3039bf53-30a6-42b0-80b1-527018794733
+  └─sloppy1vg        LVM2_member LVM2 001       Rd3cKJ-Wkpq-tZ0r-Tggi-kAx2-T4ZV-c0cqoh
+    ├─sloppy1vg-swap swap        1        SWAP1 4d2d9fa9-1648-4361-9ed5-a477ee898eaf                  [SWAP]
+    └─sloppy1vg-root ext4        1.0      ROOT1 dce8a06e-7e59-48c6-abdb-6c0a2e28beb9      432G     0% /mnt/debinst
+#+end_example
+
+*** fstab
+#+begin_example
+#
+# See fstab(5).
+#
+# <file system>                           <dir>          <type> <options>   <dump> <pass>
+tmpfs                                     /tmp           tmpfs  nosuid,nodev    0   0
+proc                                      /proc          proc   defaults        0   0
+
+/dev/sloppy1vg/root                       /              ext4   noatime,shared  0   1
+
+#/dev/sloppy1vg/home                      /home          ext4   noatime         0   2
+/dev/sloppy1vg/swap                       swap           swap   defaults        0   0
+
+UUID=BC1D-7F2B                            /boot/efi      vfat   defaults        0   2
+#+end_example
+*** crypttab
+#+begin_example
+sloppy1vg   UUID=3039bf53-30a6-42b0-80b1-527018794733  /boot/volume.key  luks
+#+end_example
+*** LUKS key
+#+begin_src bash
+  dd bs=1 count=64 if=/dev/urandom of=/boot/volume.key
+  cryptsetup luksAddKey /dev/sda2 /boot/volume.key
+  chmod 000 /boot/volume.key
+  chmod -R g-rwx,o-rwx /boot
+#+end_src
+
+
+* Debootstrap
+#+begin_src bash :noeval
+  debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs,console-setup,fonts-terminus daedalus /mnt/debinst http://devuan.c3sl.ufpr.br/merged
+#+end_src
+
+
+
+
+#+begin_src bash :noeval
+  # BIG FAT WARNING! It is "su", not "su -"
+  su
+#+end_src
+#+begin_src bash :noeval
+  mv ~/.bashrc ~/.bashrc.original
+  for a in .bash_profile .bashrc .inputrc .tmux.conf; do cp /home/${USER}/Work/devuan/dotfiles/root/${a} ~/; done
+#+end_src
+
+#+begin_src bash :noeval
+  exit
+  # BIG FAT WARNING! It is "su", not "su -"
+  su
+  mv /mnt/debinst/root/.bashrc /mnt/debinst/root/.bashrc.original
+  for a in .bash_profile .bashrc .inputrc .tmux.conf; do cp /home/${USER}/Work/devuan/dotfiles/root/${a} /mnt/debinst/root; done
+  cp /home/${USER}/Work/devuan/dotfiles/etc/apt/sources.list /mnt/debinst/etc/apt
+  cp /home/${USER}/Work/devuan/dotfiles/etc/apt/apt.conf.d/90norecommends /mnt/debinst/etc/apt/apt.conf.d
+  cp /home/${USER}/Work/devuan/dotfiles/etc/network/interfaces /mnt/debinst/etc/network
+#+end_src
+
+* Enter the chroot jail
+#+begin_src bash
+  LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
+  export TERM=xterm-color
+  printf '\e]0;%s\a' "Devuan CHROOT"
+#+end_src
+
+* Essential packages
+#+begin_src bash :noeval
+  apt install apt-rdepends aptitude autoconf automake bat bc bison btop build-essential chrony ckermit cmake curl daemon debootstrap deborphan dkms dosfstools eject evtest fakeroot file flex fonts-terminus fortune-mod fortunes fortunes-debian-hints fzf gawk gcc gdb git gpm htop inotify-tools linux-headers-amd64 locales lsb-release lsof man-db manpages manpages-dev mawk- mc mime-support ncal ncat neofetch nmap openssh-client openssh-server pciutils plocate psmisc qalc ripgrep rpm rsync rxvt-unicode silversearcher-ag tio tldr tmux traceroute unzip wget whois zile zstd
+#+end_src
+
+* Firmware
+#+begin_src bash :noeval
+  apt install --install-recommends firmware-linux-free firmware-linux-nonfree firmware-realtek
+#+end_src
+
+* Kernel
+#+begin_src bash :noeval
+  apt install linux-image-amd64 linux-headers-amd64
+#+end_src
+
+#+begin_example
+!!! ACHTUNG !!!
+cryptsetup: WARNING: target 'sloppy1vg' not found in /etc/crypttab
+cryptsetup: WARNING: target 'external1vg' not found in /etc/crypttab
+#+end_example
+
+
+#+begin_example
+sqlite3
+libc-devtools
+libc6-dev
+libtool-bin
+
+
+#+end_example
+
+* Openbox with a KDE spice
+#+begin_src bash :noeval
+  apt install adwaita-icon-theme barrier ca-certificates catdoc dbus dbus-x11 dict dunst feh firefox-esr fonts-dejavu fonts-hack fonts-inconsolata fonts-liberation fonts-open-sans geany gkrellm gmrun gnome-themes-extra libpaper-utils librsvg2-common lxappearance mesa-vulkan-drivers obconf openbox parcellite picom qiv rofi rxvt-unicode suckless-tools tint2 va-driver-all vdpau-driver-all wmctrl x11-utils xbindkeys xcape xclip xdg-desktop-portal-gtk xdg-user-dirs xdg-utils xdotool xinit xorg xserver-xorg-video-intel xserver-xorg-video-radeon xterm xtermcontrol
+#+end_src
+
+#+begin_src bash :noeval
+  apt install breeze-gtk-theme breeze-icon-theme dolphin dolphin-plugins filelight kate kcolorchooser kde-cli-tools kde-spectacle kdegraphics-thumbnailers kio-extras kompare kpat kruler ktorrent libmtp-runtime okteta okular okular-extra-backends pkexec polkit-kde-agent-1 qt5ct
+#+end_src
+
+#+begin_src bash :noeval
+  apt install --install-recommends imagemagick
+#+end_src
+
+* obmenu-generator
+#+begin_src bash :noeval
+  apt install perl libdata-dump-perl libgtk3-perl cpanminus
+  cpanm Linux::DesktopFiles
+#+end_src
+
+* Connman
+#+begin_src bash :noeval
+  apt install connman-gtk connman connman-vpn wpasupplicant
+#+end_src
+
+* GRUB
+#+begin_src bash
+  apt install grub-efi --install-recommends
+#+end_src
+
+#+begin_src bash
+  grub-install --removable --recheck --efi-directory=/boot/efi --boot-directory=/boot /dev/sdd
+  update-grub
+  update-initramfs -u
+#+end_src
+
+/etc/cryptsetup-initramfs/conf-hook
+KEYFILE_PATTERN=/boot/volume.key
