@@ -284,3 +284,17 @@ apt install --install-recommends -t daedalus-backports mpv cmus
 #+begin_src bash
   apt install -t daedalus-backports libreoffice-writer libreoffice-calc libreoffice-math libreoffice-gtk3 libreoffice-style-breeze hunspell-en-us hunspell-pt-br hunspell
 #+end_src
+
+* Enable tapping on trackpad
+#+begin_example
+# /etc/X11/xorg.conf.d/40-libinput.conf
+Section "InputClass"
+        Identifier "libinput touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "Tapping" "on"
+        Option "TappingDrag" "on"
+        Option "TappingButtonMap" "lrm"
+EndSection
+#+end_example
