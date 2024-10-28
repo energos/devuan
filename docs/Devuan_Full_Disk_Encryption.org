@@ -275,8 +275,8 @@ apt install elpa-vertico elpa-marginalia elpa-orderless
 * Audio
 #+begin_src bash :noeval
 apt install --install-recommends -t daedalus-backports pipewire-audio
-apt install --install-recommends pulseaudio-utils pulsemixer pamixer pavucontrol alsa-utils
-apt purge pulseaudio
+apt install --install-recommends pulseaudio-utils pulsemixer pamixer pavucontrol alsa-utils alsa-ucm-conf volumeicon-alsa
+apt purge pulseaudio rtkit
 apt install --install-recommends -t daedalus-backports mpv cmus
 #+end_src
 
