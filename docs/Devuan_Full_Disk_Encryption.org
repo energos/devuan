@@ -298,3 +298,22 @@ Section "InputClass"
         Option "TappingButtonMap" "lrm"
 EndSection
 #+end_example
+
+* Install printer (Brother HL-1212W)
+#+begin_src bash
+  apt install cups cups-filters cups-ipp-utils cups-pk-helper printer-driver-brlaser system-config-printer ghostscript
+  usermod -a -G lp,lpadmin lefty
+#+end_src
+As normal user:
+#+begin_src bash
+  system-config-printer
+#+end_src
+- Unlock
+- Add
+  + Network Printer
+    - Find Network Printer
+    - Host: printer ip <- Find
+      + IPP Printer <- Forward
+        - Brother (recommended) <- Forward
+          + HL-1200 (recommended) <- Forward
+    - Describe Printer <- Apply
