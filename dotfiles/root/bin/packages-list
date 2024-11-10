@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+aptitude search '!~M ~i' -F '%p' | sort -f > packages.all-manual.txt
+aptitude search  '~M ~i' -F '%p' | sort -f > packages.all-auto.txt
+aptitude search     '~i' -F '%p' | sort -f > packages.all.txt
+
+aptitude search '!~M ~S ~i ~Abackports' -F '%p' | sort -f > packages.bp-manual.txt
+aptitude search  '~M ~S ~i ~Abackports' -F '%p' | sort -f > packages.bp-auto.txt
+
+aptitude search '!~M ~S ~i !~Abackport' -F '%p' | sort -f > packages.nbp-manual.txt
+aptitude search  '~M ~S ~i !~Abackport' -F '%p' | sort -f > packages.nbp-auto.txt
+
+echo OK
