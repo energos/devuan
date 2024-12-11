@@ -160,7 +160,6 @@ sloppy1vg   UUID=3039bf53-30a6-42b0-80b1-527018794733  /boot/volume.key  luks
   chmod -R g-rwx,o-rwx /boot
 #+end_src
 
-
 * Debootstrap
 #+begin_src bash :noeval
   debootstrap --arch=amd64 --merged-usr --include=mc,tmux,zile,bash-completion,net-tools,lvm2,cryptsetup,cryptsetup-initramfs,console-setup,fonts-terminus daedalus /mnt/debinst http://devuan.c3sl.ufpr.br/merged
@@ -193,6 +192,17 @@ sloppy1vg   UUID=3039bf53-30a6-42b0-80b1-527018794733  /boot/volume.key  luks
 #+begin_src bash
   LANG=C.UTF-8 bin/xchroot /mnt/debinst /bin/bash
   export TERM=xterm-color
+  printf '\e]0;%s\a' "Devuan CHROOT"
+#+end_src
+
+* Re-enter the chroot jail
+#+begin_src bash :noeval
+  cryptsetup luksOpen /dev/sdd2 external1vg
+  vgchange -ay external1vg
+  mount /dev/external1vg/root /mnt/debinst/
+  mount /dev/sdd1 /mnt/debinst/boot/efi/
+  ~/bin/xchroot /mnt/debinst /bin/bash
+  swapon /dev/external1vg/swap
   printf '\e]0;%s\a' "Devuan CHROOT"
 #+end_src
 
@@ -234,7 +244,7 @@ libtool-bin
 
 * Openbox with a KDE spice
 #+begin_src bash :noeval
-  apt install adwaita-icon-theme barrier breeze-gtk-theme breeze-icon-theme ca-certificates catdoc dbus dbus-x11 dict dunst feh firefox-esr fonts-dejavu fonts-hack fonts-inconsolata fonts-liberation fonts-open-sans geany gkrellm gmrun gnome-themes-extra libpaper-utils librsvg2-common lxappearance mesa-utils mesa-vulkan-drivers glmark2-x11 obconf openbox parcellite picom qiv rofi rxvt-unicode suckless-tools tint2 va-driver-all vdpau-driver-all wmctrl x11-utils xbindkeys xcape xclip xdg-desktop-portal-gtk xdg-user-dirs xdg-utils xdotool xinit xorg xterm xtermcontrol
+  apt install adwaita-icon-theme arandr barrier breeze-gtk-theme breeze-icon-theme ca-certificates catdoc dbus dbus-x11 dict dunst feh firefox-esr fonts-dejavu fonts-hack fonts-inconsolata fonts-liberation fonts-open-sans geany gkrellm gmrun gnome-themes-extra libpaper-utils librsvg2-common lxappearance mesa-utils mesa-vulkan-drivers glmark2-x11 obconf openbox parcellite picom qiv rofi rxvt-unicode suckless-tools tint2 va-driver-all vdpau-driver-all wmctrl x11-utils xbindkeys xcape xclip xdg-desktop-portal-gtk xdg-user-dirs xdg-utils xdotool xinit xorg xterm xtermcontrol
 #+end_src
 
 #+begin_src :noeval
@@ -275,19 +285,25 @@ libtool-bin
 /etc/cryptsetup-initramfs/conf-hook
 KEYFILE_PATTERN=/boot/volume.key
 
+* Users
+#+begin_src bash :noeval
+  adduser energos
+  usermod -a -G adm,dialout,lpadmin,lp,video energos
+#+end_src
+
 * EMACS
 #+begin_src bash :noeval
-apt install -t daedalus-backports emacs emacs-common-non-dfsg
-apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev zlib1g-dev make pkg-config cmake libtool libvterm-dev djvulibre-bin
-apt install elpa-vertico elpa-marginalia elpa-orderless
+  apt install -t daedalus-backports emacs emacs-common-non-dfsg
+  apt install autoconf automake gcc libpng-dev libpoppler-dev libpoppler-glib-dev zlib1g-dev make pkg-config cmake libtool libvterm-dev djvulibre-bin
+  apt install elpa-vertico elpa-marginalia elpa-orderless
 #+end_src
 
 * Audio
 #+begin_src bash :noeval
-apt install --install-recommends -t daedalus-backports pipewire-audio rtkit-
-apt install --install-recommends pulseaudio-utils pulsemixer pamixer pavucontrol alsa-utils alsa-ucm-conf volumeicon-alsa
-apt purge pulseaudio rtkit
-apt install --install-recommends -t daedalus-backports mpv cmus
+  apt install --install-recommends -t daedalus-backports pipewire-audio rtkit-
+  apt install --install-recommends pulseaudio-utils pulsemixer pamixer pavucontrol alsa-utils alsa-ucm-conf volumeicon-alsa
+  apt purge pulseaudio rtkit
+  apt install --install-recommends -t daedalus-backports mpv cmus
 #+end_src
 
 * Office
