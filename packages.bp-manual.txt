@@ -1,7 +1,10 @@
-emacs-gtk
+debootstrap
+emacs
 libreoffice-calc
 libreoffice-gtk3
 libreoffice-math
 libreoffice-style-breeze
 libreoffice-writer
+pipewire-audio
+qemu-system-x86
 yt-dlp

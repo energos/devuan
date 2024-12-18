@@ -253,6 +253,10 @@ The following additional packages will be installed:
   apt install eagle
 #+end_src
 
+** Issues
+- [[https://github.com/89luca89/distrobox/issues/1369][shell prompt no longer differentiates when inside container · Issue #1369 · 89luca89/distrobox · GitHub]]
+- [[https://github.com/89luca89/distrobox/blob/main/docs/useful_tips.md][distrobox/docs/useful_tips.md at main · 89luca89/distrobox · GitHub]]
+
 * Install printer (Brother HL-1212W)
 #+begin_src bash
   apt install cups cups-filters cups-ipp-utils cups-pk-helper printer-driver-brlaser system-config-printer ghostscript
@@ -271,11 +275,6 @@ As normal user:
         - Brother (recommended) <- Forward
           + HL-1200 (recommended) <- Forward
     - Describe Printer <- Apply
-
-* To buku or not to buku
-#+begin_src bash
-  apt install buku python3-lxml
-#+end_src
 
 * Stuff
 #+begin_src bash

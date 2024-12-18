@@ -208,7 +208,7 @@ sloppy1vg   UUID=3039bf53-30a6-42b0-80b1-527018794733  /boot/volume.key  luks
 
 * Essential packages
 #+begin_src bash :noeval
-  apt install apt-rdepends aptitude autoconf automake bat bc bison btop build-essential chrony ckermit cmake curl daemon debootstrap deborphan dkms dosfstools eject evtest fakeroot file flex fonts-terminus fortune-mod fortunes fortunes-debian-hints fzf gawk gcc gdb git gpm htop inotify-tools linux-headers-amd64 locales lsb-release lsof man-db manpages manpages-dev mawk- mc mime-support ncal ncat neofetch nmap openssh-client openssh-server pciutils plocate psmisc qalc ripgrep rpm rsync rxvt-unicode silversearcher-ag tio tldr tmux traceroute unzip wget whois zile zstd
+  apt install acpi-support apt-rdepends aptitude autoconf automake bat bc bison btop build-essential chrony ckermit cmake curl daemon debootstrap deborphan dkms dosfstools eject evtest fakeroot file flex fonts-terminus fortune-mod fortunes fortunes-debian-hints fzf gawk gcc gdb git gpm htop inotify-tools linux-headers-amd64 locales lsb-release lsof man-db manpages manpages-dev mawk- mc mime-support ncal ncat neofetch nmap openssh-client openssh-server pciutils plocate psmisc qalc ripgrep rpm rsync rxvt-unicode silversearcher-ag tio tldr tmux traceroute unzip wget whois zile zstd
 #+end_src
 
 * Firmware
@@ -248,12 +248,12 @@ libtool-bin
 #+end_src
 
 #+begin_src :noeval
-  apt insrall xserver-xorg-video-intel xserver-xorg-video-radeon
+  apt install xserver-xorg-video-intel xserver-xorg-video-radeon
   apt install xserver-xorg-video-qxl spice-vdagent
 #+end_src
 
 #+begin_src bash :noeval
-  apt install breeze dolphin dolphin-plugins konqueror konq-plugins filelight kate kcolorchooser kde-cli-tools kde-spectacle kdegraphics-thumbnailers kio-extras kompare kpat kruler ktorrent libmtp-runtime okteta okular okular-extra-backends pkexec polkit-kde-agent-1 qt5ct
+  apt install breeze dolphin dolphin-plugins konqueror konq-plugins konsole filelight kate kcolorchooser kde-cli-tools kde-spectacle kdegraphics-thumbnailers kio-extras kompare kpat kruler ktorrent libmtp-runtime okteta okular okular-extra-backends pkexec polkit-kde-agent-1 qt5ct
 #+end_src
 
 #+begin_src bash :noeval
