@@ -199,6 +199,38 @@
 (consult-customize
  consult-buffer :preview-key nil)
 
+;; corfu
+;; https://github.com/minad/corfu
+;; https://github.com/minad/corfu/blob/main/extensions/corfu-popupinfo.el
+(unless (require 'corfu nil t)
+  (use-package corfu))
+
+;; Optional customizations
+(setq
+ ;;  corfu-cycle t                 ;; Enable cycling for `corfu-next/previous'
+ corfu-auto nil                    ;; Disable auto completion
+ corfu-separator ?\s               ;; Orderless field separator
+ corfu-quit-at-boundary nil        ;; Never quit at completion boundary
+ corfu-quit-no-match 'separator    ;; Quit if there is no match and no separator
+ ;; corfu-preview-current nil      ;; Disable current candidate preview
+ ;; corfu-preselect 'prompt        ;; Preselect the prompt
+ ;; corfu-on-exact-match nil       ;; Configure handling of exact matches
+ ;; corfu-scroll-margin 5          ;; Use scroll margin
+ )
+
+(bind-keys :map corfu-map
+           ("M-SPC"      . corfu-insert-separator))
+
+;; Enable Corfu only for certain modes.
+;; :hook ((prog-mode . corfu-mode)
+;;        (shell-mode . corfu-mode)
+;;        (eshell-mode . corfu-mode))
+;;
+;; Recommended: Enable Corfu globally.
+;; This is recommended since Dabbrev can be used globally (M-/).
+;; See also 'corfu-excluded-modes'.
+(global-corfu-mode)
+
 ;; pdf-tools
 ;; https://github.com/vedang/pdf-tools
 (unless (require 'pdf-tools nil t)
