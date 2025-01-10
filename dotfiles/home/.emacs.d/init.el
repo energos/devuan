@@ -231,6 +231,15 @@
 ;; See also 'corfu-excluded-modes'.
 (global-corfu-mode)
 
+;; eglot
+(add-hook 'c-mode-hook #'eglot-ensure)
+(add-hook 'c++-mode-hook #'eglot-ensure)
+(add-hook 'python-ts-mode-hook #'eglot-ensure)
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (setq-local eldoc-echo-area-use-multiline-p nil)
+            (eldoc-mode 1)))
+
 ;; pdf-tools
 ;; https://github.com/vedang/pdf-tools
 (unless (require 'pdf-tools nil t)
