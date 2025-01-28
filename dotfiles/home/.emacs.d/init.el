@@ -324,6 +324,32 @@
 ;; See also 'corfu-excluded-modes'.
 (global-corfu-mode)
 
+;; embark
+;; https://github.com/oantolin/embark
+(unless (require 'embark nil t)
+  (use-package embark))
+(bind-keys
+ ("C-."     . embark-act)         ;; pick some comfortable binding
+ ("H-."     . embark-act)
+ ("C-;"     . embark-dwim)        ;; good alternative: M-.
+ ("H-<f13>" . embark-dwim)
+ ("C-h B"   . embark-bindings))   ;; alternative for 'describe-bindings'
+;; https://github.com/oantolin/embark#quitting-the-minibuffer-after-an-action
+;; (setq embark-quit-after-action nil)
+(setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
+;; Optionally replace the key help with a completing-read interface
+(setq prefix-help-command #'embark-prefix-help-command)
+;; Hide the mode line of the Embark live/completions buffers
+(add-to-list 'display-buffer-alist
+             '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+               nil
+               (window-parameters (mode-line-format . none))))
+
+;; Consult users will also want the embark-consult package.
+(unless (require 'embark-consult nil t)
+  (use-package embark-consult))
+(add-hook 'embark-collect-mode #'consult-preview-at-point-mode)
+
 ;; eglot
 (add-hook 'c-mode-hook #'eglot-ensure)
 (add-hook 'c++-mode-hook #'eglot-ensure)
