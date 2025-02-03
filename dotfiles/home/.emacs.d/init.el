@@ -53,9 +53,12 @@
 (setq hscroll-step 1)                   ; one character horizontal scroll,
 (setq hscroll-margin 0)                 ; on window edges
 
-;; ediff: no control frame, side by side windows
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-(setq ediff-split-window-function 'split-window-horizontally)
+;; ediff: no control frame, side by side windows, skip 'irrelevant' differences
+(with-eval-after-load 'ediff
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq-default ediff-ignore-similar-regions t)
+  )
 
 ;; prefer horizontal split (side-by-side)
 (setq split-width-threshold 128)
@@ -162,6 +165,11 @@
            ("<M-tab>"       . nil))
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html
 (setq auto-revert-check-vc-info t)
+;; https://emacs.stackexchange.com/questions/41476/magit-enable-toggle-truncate-line-in-diff-mode
+(add-hook
+ 'magit-mode-hook
+ (lambda ()
+   (setq truncate-lines nil)))
 
 ;; expand-region
 ;; https://github.com/magnars/expand-region.el
@@ -179,7 +187,8 @@
 ;; https://github.com/oantolin/orderless
 (require 'orderless)
 (setq completion-styles '(orderless basic)
-      completion-category-overrides '((file (styles basic partial-completion))))
+      completion-category-overrides '((file (styles basic partial-completion))
+                                      (eglot (styles orderless basic))))
 
 ;; marginalia
 ;; https://github.com/minad/marginalia
@@ -198,6 +207,7 @@
 ;; disable previews
 (consult-customize
  consult-buffer :preview-key nil)
+(keymap-set consult-narrow-map "C-h" #'consult-narrow-help)
 
 ;; <hack>
 ;; Shorten recent files in consult-buffer
@@ -351,13 +361,35 @@
 (add-hook 'embark-collect-mode #'consult-preview-at-point-mode)
 
 ;; eglot
-(add-hook 'c-mode-hook #'eglot-ensure)
-(add-hook 'c++-mode-hook #'eglot-ensure)
+(require 'eglot)
+;; https://clangd.llvm.org/installation#editor-plugins
+(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+(add-hook 'c-ts-mode-hook #'eglot-ensure)
+(add-hook 'c++-ts-mode-hook #'eglot-ensure)
 (add-hook 'python-ts-mode-hook #'eglot-ensure)
 (add-hook 'eglot-managed-mode-hook
           (lambda ()
             (setq-local eldoc-echo-area-use-multiline-p nil)
             (eldoc-mode 1)))
+(setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
+
+;; tree-sitter
+(setq major-mode-remap-alist
+      '(
+        ;; (bash-mode   . bash-ts-mode)
+        (c-mode      . c-ts-mode)
+        (c++-mode    . c++-ts-mode)
+        (python-mode . python-ts-mode)
+        ))
+
+;; flymake
+(with-eval-after-load 'flymake
+  (setq python-flymake-command "pyflakes3")
+  (setq flymake-mode-line-lighter "")
+  (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
+  (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+  (define-key flymake-mode-map (kbd "M-f") 'consult-flymake)
+  )
 
 ;; pdf-tools
 ;; https://github.com/vedang/pdf-tools
