@@ -20,6 +20,7 @@ busybox
 bzip2
 calibre-bin
 catatonit
+clangd-14
 cmake-data
 cmus-plugin-ffmpeg
 coinor-libcbc3
@@ -71,12 +72,14 @@ firmware-amd-graphics
 firmware-misc-nonfree
 fontconfig
 fontconfig-config
+font-manager-common
 fonts-dejavu-core
 fonts-dejavu-extra
 fonts-liberation2
 fonts-lmodern
 fonts-opensymbol
 fonts-urw-base35
+font-viewer
 fortunes-min
 fuse3
 fuse-overlayfs
@@ -86,7 +89,6 @@ gcc-12
 geany-common
 gettext-base
 gir1.2-atk-1.0
-gir1.2-ayatanaappindicator3-0.1
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0
 gir1.2-glib-2.0
@@ -201,6 +203,7 @@ libaribb24-0
 libasan8
 libasound2
 libasound2-data
+libaspell15
 libass9
 libassuan0
 libasyncns0
@@ -225,9 +228,6 @@ libavformat59
 libavif15
 libavutil57
 libayatana-appindicator1
-libayatana-appindicator3-1
-libayatana-ido3-0.4-0
-libayatana-indicator3-7
 libayatana-indicator7
 libb2-1
 libbabeltrace1
@@ -268,6 +268,7 @@ libcap2
 libcap2-bin
 libcap-ng0
 libcapstone4
+libc-ares2
 libc-bin
 libcbor0.8
 libcc1-0
@@ -283,6 +284,8 @@ libchm1
 libchromaprint1
 libcjson1
 libc-l10n
+libclang-common-14-dev
+libclang-cpp14
 libclucene-contribs1v5
 libclucene-core1v5
 libcmark0.30.2
@@ -312,7 +315,6 @@ libdaxctl1
 libdb5.3
 libdbus-1-3
 libdbusmenu-glib4
-libdbusmenu-gtk3-4
 libdbusmenu-gtk4
 libdbusmenu-qt5-2
 libdc1394-25
@@ -357,6 +359,7 @@ libegl-mesa0
 libelf1
 libelogind0
 libelogind-compat
+libenchant-2-2
 libeot0
 libepoxy0
 libepub0
@@ -455,12 +458,17 @@ libgpgmepp6
 libgpm2
 libgprofng0
 libgraphite2-3
+libgrpc++1.51
+libgrpc29
 libgs10
 libgs10-common
 libgs-common
 libgsm1
 libgssapi-krb5-2
+libgssdp-1.6-0
 libgstreamer1.0-0
+libgstreamer-gl1.0-0
+libgstreamer-plugins-bad1.0-0
 libgstreamer-plugins-base1.0-0
 libgtk2.0-0
 libgtk2.0-common
@@ -472,6 +480,8 @@ libgtksourceview-4-common
 libgtk-vnc-2.0-0
 libgts-0.7-5
 libgudev-1.0-0
+libgupnp-1.6-0
+libgupnp-igd-1.0-4
 libgvc6
 libgvnc-1.0-0
 libgvpr2
@@ -515,10 +525,12 @@ libitm1
 libixml10
 libjack-jackd2-0
 libjansson4
+libjavascriptcoregtk-4.0-18
 libjbig0
 libjbig2dec0
 libjpeg62-turbo
 libjpeg-turbo-progs
+libjq1
 libjs-jquery
 libjson-c5
 libjsoncpp25
@@ -696,6 +708,7 @@ liblerc4
 liblilv-0-0
 liblinear4
 liblirc-client0
+libllvm14
 libllvm15
 liblmdb0
 liblocale-gettext-perl
@@ -719,6 +732,7 @@ libmagickcore-6.q16-6
 libmagickcore-6.q16-6-extra
 libmagickwand-6.q16-6
 libmagic-mgc
+libmanette-0.2-0
 libmarkdown2
 libmatroska7
 libmbedcrypto7
@@ -761,6 +775,7 @@ libnfs13
 libnftables1
 libnftnl11
 libnghttp2-14
+libnice10
 libnl-3-200
 libnl-genl-3-200
 libnl-route-3-200
@@ -856,7 +871,9 @@ libpoppler-qt5-1
 libpopt0
 libpostproc56
 libproc2-0
+libprotobuf32
 libprotobuf-lite32
+libprotoc32
 libproxy1v5
 libpskc0
 libpsl5
@@ -1114,10 +1131,7 @@ libvirt-clients
 libvirt-daemon
 libvirt-daemon-config-network
 libvirt-daemon-config-nwfilter
-libvirt-daemon-driver-lxc
 libvirt-daemon-driver-qemu
-libvirt-daemon-driver-vbox
-libvirt-daemon-driver-xen
 libvirt-daemon-system-sysv
 libvirt-glib-1.0-0
 libvirt-glib-1.0-data
@@ -1141,6 +1155,7 @@ libwayland-cursor0
 libwayland-egl1
 libwayland-server0
 libwbclient0
+libwebkit2gtk-4.0-37
 libwebp7
 libwebpdemux2
 libwebpmux3
@@ -1150,6 +1165,7 @@ libwmf-0.2-7
 libwmf-0.2-7-gtk
 libwmf0.2-7-gtk
 libwmflite-0.2-7
+libwoff1
 libwpd-0.10-10
 libwpg-0.3-3
 libwps-0.4-4
@@ -1202,16 +1218,6 @@ libxdgutilsdesktopentry1.0.1
 libxdmcp6
 libxdmcp-dev
 libxdo3
-libxencall1
-libxendevicemodel1
-libxenevtchn1
-libxenforeignmemory1
-libxengnttab1
-libxenhypfs1
-libxenmisc4.17
-libxenstore4
-libxentoolcore1
-libxentoollog1
 libxext6
 libxext-dev
 libxfixes3
@@ -1261,12 +1267,12 @@ libzxing2
 libzzip-0-13
 linux-base
 linux-compiler-gcc-12-x86
-linux-headers-6.1.0-27-amd64
-linux-headers-6.1.0-27-common
-linux-headers-6.1.0-28-amd64
-linux-headers-6.1.0-28-common
-linux-image-6.1.0-27-amd64
-linux-image-6.1.0-28-amd64
+linux-headers-6.1.0-30-amd64
+linux-headers-6.1.0-30-common
+linux-headers-6.1.0-31-amd64
+linux-headers-6.1.0-31-common
+linux-image-6.1.0-30-amd64
+linux-image-6.1.0-31-amd64
 linux-kbuild-6.1
 linux-libc-dev
 lp-solve
@@ -1284,7 +1290,6 @@ mokutil
 ncurses-base
 ncurses-bin
 netavark
-netcat-openbsd
 netpbm
 nmap-common
 ocl-icd-libopencl1
@@ -1310,9 +1315,7 @@ pkgconf
 pkgconf-bin
 plasma-framework
 pocketsphinx-en-us
-policykit-1
 polkitd
-polkitd-pkla
 poppler-data
 poppler-utils
 preview-latex-style
@@ -1327,9 +1330,11 @@ python3-brotli
 python3-bs4
 python3-cairo
 python3-certifi
+python3-cffi-backend
 python3-chardet
 python3-charset-normalizer
 python3-chm
+python3-cryptography
 python3-css-parser
 python3-cssselect
 python3-cups
@@ -1337,6 +1342,7 @@ python3-cupshelpers
 python3-dateutil
 python3-dbus
 python3-distutils
+python3-docstring-to-markdown
 python3-feedparser
 python3-gi
 python3-gi-cairo
@@ -1345,6 +1351,7 @@ python3-html5lib
 python3-html5-parser
 python3-idna
 python3-ifaddr
+python3-jedi
 python3-jeepney
 python3-lib2to3
 python3-libvirt
@@ -1356,12 +1363,16 @@ python3-minimal
 python3-msgpack
 python3-mutagen
 python3-netifaces
+python3-parso
 python3-pil
 python3-pip-whl
 python3-pkg-resources
+python3-pluggy
 python3-py7zr
 python3-pycryptodome
+python3-pyflakes
 python3-pygments
+python3-pylsp-jsonrpc
 python3-pyparsing
 python3-pyqt6
 python3-pyqt6.qtqml
@@ -1381,6 +1392,7 @@ python3-six
 python3-soupsieve
 python3-speechd
 python3-texttable
+python3-ujson
 python3-urllib3
 python3-webencodings
 python3-websockets
@@ -1472,6 +1484,7 @@ x11-xkb-utils
 x11-xserver-utils
 xauth
 xbitmaps
+xdg-dbus-proxy
 xdg-desktop-portal
 xfonts-100dpi
 xfonts-75dpi
