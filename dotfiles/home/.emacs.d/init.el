@@ -344,6 +344,7 @@
  ("C-;"     . embark-dwim)        ;; good alternative: M-.
  ("H-<f13>" . embark-dwim)
  ("C-h B"   . embark-bindings))   ;; alternative for 'describe-bindings'
+(setq embark-cycle-key "C-.")
 ;; https://github.com/oantolin/embark#quitting-the-minibuffer-after-an-action
 ;; (setq embark-quit-after-action nil)
 (setq embark-quit-after-action '((kill-buffer . nil) (t . t)))
@@ -434,6 +435,21 @@
   ;; but you can use any other Nerd Font if you want
   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
   )
+
+;; sly
+;; https://github.com/joaotavora/sly
+(use-package sly
+  :defer
+  :config
+  (setq inferior-lisp-program (executable-find "sbcl")
+        org-babel-lisp-eval-fn #'sly-eval
+        sly-symbol-completion-mode nil
+        sly-mrepl-pop-sylvester nil)
+  (bind-keys :map sly-mode-map ("H-<f13>" . sly-eval-last-expression)))
+
+;; ebuku
+;; https://github.com/flexibeast/ebuku
+(use-package ebuku)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
@@ -590,6 +606,8 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
    (C . t)
    (python . t)
    (forth . t)
+   (julia . t)
+   (lisp . t)
    ))
 
 ;; --- DANGER! ---
@@ -604,6 +622,8 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
               (string= lang "C")
               (string= lang "bash")
               (string= lang "python")
+              (string= lang "julia")
+              (string= lang "lisp")
               ))))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
