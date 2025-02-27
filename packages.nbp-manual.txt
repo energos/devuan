@@ -111,6 +111,7 @@ gcc
 gcc-12-base
 gdb
 geany
+gforth
 ghostscript
 git
 gkrellm

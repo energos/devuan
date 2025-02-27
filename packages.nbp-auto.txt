@@ -83,6 +83,8 @@ g++-12
 gcc-12
 geany-common
 gettext-base
+gforth-common
+gforth-lib
 gir1.2-atk-1.0
 gir1.2-freedesktop
 gir1.2-gdkpixbuf-2.0

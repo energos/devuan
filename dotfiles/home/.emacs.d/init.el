@@ -608,6 +608,7 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
    (forth . t)
    (julia . t)
    (lisp . t)
+   (forth . t)
    ))
 
 ;; --- DANGER! ---
@@ -624,6 +625,7 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
               (string= lang "python")
               (string= lang "julia")
               (string= lang "lisp")
+              (string= lang "forth")
               ))))
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

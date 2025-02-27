@@ -203,6 +203,9 @@ gdb
 geany
 geany-common
 gettext-base
+gforth
+gforth-common
+gforth-lib
 ghostscript
 gir1.2-atk-1.0
 gir1.2-freedesktop
