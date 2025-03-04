@@ -117,7 +117,6 @@ deborphan
 debugedit
 devuan-keyring
 dfu-util
-dh-elpa-helper
 dict
 dictionaries-common
 diffutils
@@ -140,11 +139,6 @@ e2fsprogs
 efibootmgr
 eject
 elogind
-elpa-compat
-elpa-marginalia
-elpa-orderless
-elpa-seq
-elpa-vertico
 emacs
 emacs-bin-common
 emacs-common

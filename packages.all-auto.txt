@@ -50,7 +50,6 @@ dbus-system-bus-common
 dconf-gsettings-backend
 dconf-service
 debugedit
-dh-elpa-helper
 dictionaries-common
 dirmngr
 dmeventd
@@ -60,8 +59,6 @@ dns-root-data
 dpkg-dev
 efibootmgr
 elogind
-elpa-compat
-elpa-seq
 emacs-bin-common
 emacs-common
 emacs-el

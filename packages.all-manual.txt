@@ -78,9 +78,6 @@ dpkg
 dunst
 e2fsprogs
 eject
-elpa-marginalia
-elpa-orderless
-elpa-vertico
 emacs
 emacs-common-non-dfsg
 eudev

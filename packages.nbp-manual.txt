@@ -77,9 +77,6 @@ dpkg
 dunst
 e2fsprogs
 eject
-elpa-marginalia
-elpa-orderless
-elpa-vertico
 emacs-common-non-dfsg
 eudev
 evtest
