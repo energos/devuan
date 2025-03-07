@@ -445,7 +445,12 @@
         org-babel-lisp-eval-fn #'sly-eval
         sly-symbol-completion-mode nil
         sly-mrepl-pop-sylvester nil)
-  (bind-keys :map sly-mode-map ("H-<f13>" . sly-eval-last-expression)))
+  :bind (:map sly-mode-map
+              ("H-<f13>" . sly-eval-last-expression)
+              ("H-r"     . (lambda () (interactive)
+                             (sly-mrepl-clear-repl)
+                             (sleep-for 0.1)
+                             (sly-restart-inferior-lisp)))))
 
 ;; ebuku
 ;; https://github.com/flexibeast/ebuku
