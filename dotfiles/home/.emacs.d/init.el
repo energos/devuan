@@ -452,6 +452,18 @@
                              (sleep-for 0.1)
                              (sly-restart-inferior-lisp)))))
 
+;; auctex
+(use-package auctex
+  :defer t
+  :config
+  ;; (setq font-latex-fontify-script nil)
+  (setq font-latex-fontify-sectioning 1.05)
+  (setq TeX-engine 'xetex)
+  (setq TeX-view-program-selection
+        '((output-pdf "PDF Viewer")))
+  (setq TeX-view-program-list
+        '(("PDF Viewer" "okular --unique %o"))))
+
 ;; ebuku
 ;; https://github.com/flexibeast/ebuku
 (use-package ebuku)
