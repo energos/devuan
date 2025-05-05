@@ -188,7 +188,8 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))
-                                   (eglot (styles orderless basic)))))
+                                   (eglot (styles orderless basic))
+                                   (unicode-name (styles orderless basic substring)))))
 
 ;; marginalia
 ;; https://github.com/minad/marginalia
