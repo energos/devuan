@@ -440,7 +440,7 @@
 ;; sly
 ;; https://github.com/joaotavora/sly
 (use-package sly
-  :defer
+  :defer t
   :config
   (setq inferior-lisp-program (executable-find "sbcl")
         org-babel-lisp-eval-fn #'sly-eval
