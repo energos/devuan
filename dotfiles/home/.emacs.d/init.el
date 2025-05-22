@@ -472,6 +472,21 @@
 ;; D Language
 (use-package d-mode)
 
+;; Tcl Language
+(setq tcl-application "tclsh")
+(defun tcl-eval-line()
+  "Send the current region or line to the inferior Tcl process."
+  (interactive)
+  (unless (use-region-p)
+    (push-mark (line-end-position))
+    (goto-char (line-beginning-position))
+    (setq mark-active t))
+  (tcl-eval-region (region-beginning) (region-end))
+  (deactivate-mark)
+  )
+(with-eval-after-load 'tcl
+  (define-key tcl-mode-map (kbd "H-<f13>") 'tcl-eval-line))
+
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; THEMES
 
@@ -625,6 +640,7 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
    (shell . t)
    (emacs-lisp . t)
    (C . t)
+   (tcl . t)
    (python . t)
    (forth . t)
    (julia . t)
@@ -643,6 +659,7 @@ If DEC is nil or absent: Return N+1 if 0≤N<MAX, 0 if N<0, MAX if N≥MAX."
               (string= lang "elisp")
               (string= lang "C")
               (string= lang "D")
+              (string= lang "tcl")
               (string= lang "bash")
               (string= lang "python")
               (string= lang "julia")
